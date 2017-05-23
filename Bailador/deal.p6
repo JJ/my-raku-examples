@@ -4,16 +4,17 @@ use Bailador;
 use JSON::Tiny;
 
 my %suits =  :H<♥>, :D<♦>, :C<♣>, :S<♠>;
-my @cards;
+my $cards = set();
 
 put "/(.+)" => sub ($card) {
     my $suit = %suits{substr($card,*-1)};
     my $this-card = $card.chop ~ $suit; 
-    @cards.push( $this-card );
+    $cards  ∪= $this-card ;
     return to-json { card => $this-card};
 }
 
 get "/" => sub {
-    return to-json { card => @cards.pick };
+    return to-json { card => $cards.pick };
 }
+
 baile;
