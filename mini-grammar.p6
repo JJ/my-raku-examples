@@ -1,3 +1,5 @@
+#!/usr/bin/env perl6
+
 grammar Enhanced-Paragraph {
     token TOP { <superword>[ (\s+) <superword>]+ }
     token superword { <word> | <enhanced-word> }
@@ -5,8 +7,9 @@ grammar Enhanced-Paragraph {
     token enhanced-word { \* <word> \* }
 }
 
-my $paragraph = "þor is *mighty*";
-my $parsed = Enhanced-Paragraph.parse($paragraph);
-say $parsed;
+sub MAIN ( Str $paragraph ) {
+    my $parsed = Enhanced-Paragraph.parse($paragraph);
+    say $parsed;
+}
 
 
