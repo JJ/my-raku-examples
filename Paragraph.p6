@@ -10,7 +10,7 @@ grammar Paragraph {
 class Paragraph-actions {
     method TOP ($/) { make [~] $/.caps».value.map({ .made // .Str }) }
     method word($/) { make $<quoted>?? $<quoted>.made !! $<letters>.made }
-    method quoted($/) { make $<quote>.made~$<letters>.made~$<quote>.made;}
+    method quoted($/) { say "Quoted"; make $<quote>.made ~ $<letters>.made ~ $<quote>.made;}
     method quote($/) { make ~$/ }
     method letters($/) { make ~$/ }	
 }
