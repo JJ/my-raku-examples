@@ -1,13 +1,12 @@
 grammar Paragraph {
     token TOP { <word>[ (\s+) <word>]+ }
-    token word { (<[\*\`]>)? (\w+)+? $0? }
+    token word { <letters> | <quoted> }
+    token quoted { <(<quote>)> <letters> $0 } 
+    token quote { "*"|"`" }
+    token letters { \w+ }
 }
 
-my $paragraph = "This includes several words";
+my $paragraph = "This includes one *enhanced* word and `backquote`";
 my $parsed = Paragraph.parse($paragraph);
-say $parsed;
-
-$paragraph = "This includes one *enhanced* word";
-$parsed = Paragraph.parse($paragraph);
 say $parsed;
 
