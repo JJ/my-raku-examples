@@ -6,7 +6,7 @@ grammar Quoted {
     token letters { \w+ }
 }
 
-my $quoted = "*enhanced*";
+my $quoted = "*enhanced`";
 my $parsed = Quoted.parse($quoted);
 say $parsed;
 
