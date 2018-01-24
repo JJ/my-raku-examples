@@ -14,6 +14,7 @@ BEGIN { say ‘Begin’ }
 say ‘Start’;
 say double-pure(8);
 for ^20 {
-    say double-pure($^þ) + double-dirty($^þ);
+    say double-pure($^þ);
+    say double-dirty($^þ);
 }
 
