@@ -1,9 +1,12 @@
 #!/usr/bin/env perl6
 
 use v6;
-try die "Something bad happened";
+my $þor = sub { die "Something bad happened" };
+try {
+    $þor();
+}
 if ($!) {
-    say $!.message; # OUTPUT: «Something bad happened.␤»
+    say $!.backtrace; # OUTPUT: «Something bad happened.␤»
 }
 
 try {
