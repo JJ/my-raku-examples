@@ -6,7 +6,8 @@ use v6;
  say (10, 'answer') ~~ $sig;
  # OUTPUT: «True␤»
  given $sig {
-     when :(Int, Str) { say 'match' }
      when ('answer',10) { say 'mismatch' }
+     when :(Int, Str)   { say 'match' }
+     default            { say 'no match' }
  }
  # OUTPUT: «match␤»
