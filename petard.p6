@@ -20,3 +20,9 @@ say @result;
     map( {"VULGAR FRACTION " ~ $^þ },
 	 (<TWO THREE FOUR FIVE SEVEN> »~» " " X~ <FIFTHS SIXTHS EIGHTHS>) );
 say @result;
+
+ my @fractions = <TWO THREE FOUR FIVE SEVEN> »~» " " X~ <FIFTHS SIXTHS EIGHTHS> ;
+ @result = map { .uniparse },               
+     grep { .uniparse },                    
+     map( {"VULGAR FRACTION " ~ $^þ }, @fractions); 
+say @result;
