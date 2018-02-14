@@ -1,11 +1,8 @@
 #!/usr/bin/env perl6
 
 # Feed (left-to-right) with parentheses, read top-to-bottom 
-my @result = ((1..10).pick(5) X/ (3..6).pick(5)) ==> map( { $^þ * 10 } ) ==> sort;  
+my @result =  ( <TWO THREE FOUR FIVE SEVEN> »~» " " X~ <FIFTHS SIXTHS EIGHTHS> ) ==> map( {"VULGAR FRACTION " ~ $^þ } ) ==> grep({ .uniparse }) ==> map( { .uniparse} );
 say @result;
 
-@result =  sort map { $^þ * 10 }, ((1..10).pick(5) X/ (3..6).pick(5));
-say @result;
-
-@result = ((1..10).pick(5) X/ (3..6).pick(5)).map( { $^þ * 10 } ).sort;
+@result = ( <TWO THREE FOUR FIVE SEVEN> »~» " " X~ <FIFTHS SIXTHS EIGHTHS>).map( {"VULGAR FRACTION " ~ $^þ } ).grep({ .uniparse }).map({ .uniparse });
 say @result;
