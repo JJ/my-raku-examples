@@ -10,5 +10,13 @@ my @result =(
 #
 say @result;
 
-@result = ( <TWO THREE FOUR FIVE SEVEN> »~» " " X~ <FIFTHS SIXTHS EIGHTHS>).map( {"VULGAR FRACTION " ~ $^þ } ).grep({ .uniparse }).map({ .uniparse });
+@result = ( <TWO THREE FOUR FIVE SEVEN> »~» " " X~ <FIFTHS SIXTHS EIGHTHS>)
+    .map( {"VULGAR FRACTION " ~ $^þ } )
+    .grep({ .uniparse })
+    .map({ .uniparse });
+say @result;
+@result = map { .uniparse },
+    grep { .uniparse },
+    map( {"VULGAR FRACTION " ~ $^þ },
+	 (<TWO THREE FOUR FIVE SEVEN> »~» " " X~ <FIFTHS SIXTHS EIGHTHS>) );
 say @result;
