@@ -6,10 +6,10 @@ class Journey {
     has @.travelers;
     has Str $.notes is rw;
 
-    multi method notes() { $!notes };
+    multi method notes() { "$!notes\n" };
     multi method notes( Str $note ) { $!notes ~= "$note\n\t" };
 
-    method Str { "⤷ $!origin\n\t" ~ self.notes() ~ "\n$!destination ⤶\n" };
+    method Str { "⤷ $!origin\n\t" ~ self.notes() ~ "$!destination ⤶\n" };
 }
 
 my $trip = Journey.new( :origin<Here>, :destination<There>,
