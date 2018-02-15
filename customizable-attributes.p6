@@ -4,7 +4,7 @@ class Journey {
     has $.origin;
     has $.destination;
     has @.travelers;
-    has Str $.notes = "==Start==\n";
+    has Str $!notes = "==Start==\n";
 
     multi method notes() { $!notes };
     multi method notes( Str $note ) { $!notes ~= "\n\t" ~ $note };
