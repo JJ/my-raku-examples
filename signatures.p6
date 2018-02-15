@@ -7,7 +7,7 @@ say (10, 'answer') ~~ $sig;
 # OUTPUT: «True␤»
 given $sig {
     when :(Str, Int) { say 'mismatch' }
-    when :($, $) { say 'match' }
+    when :($, $)     { say 'match' }
     default          { say 'no match' }
 }
 # OUTPUT: «match␤»
