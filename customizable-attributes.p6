@@ -4,15 +4,17 @@ class Journey {
     has $.origin;
     has $.destination;
     has @.travelers;
-    has Str $!notes = "==Start==\n";
+    has Str $.notes = "==Start==\n";
 
     multi method notes() { $!notes };
-    multi method notes( Str $note ) { $!notes ~= "\n" ~ $note };
+    multi method notes( Str $note ) { $!notes ~= "\n\t" ~ $note };
+
+    method Str { "⤷ $!origin\n\t$!notes\n$!destination ⤶\n" };
 }
 
 my $trip = Journey.new( :origin<Here>, :destination<There>,
 			travelers => <þor Freya> );
 
-say "\t→" ~ $trip.notes();
 $trip.notes("First steps");
-say "\t→" ~ $trip.notes();
+$trip.notes("Almost there");
+print $trip;
