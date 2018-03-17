@@ -3,11 +3,11 @@
 use v6;
 
 role my-role {
-    has Str $.attribute;
+    has Str $.dash-attribute;
 };
 
 class my-class does my-role {};
 
-my $my-instance = my-class.new( attribute => 'This is the attribute' );
+my $my-instance = my-class.new( dash-attribute => 'This is the attribute' );
 
-say $my-instance.attribute;
+say $my-instance.dash-attribute;
