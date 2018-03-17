@@ -3,7 +3,7 @@
 use v6;
 
 role my-role {
-    has Str $.dash-attribute;
+    has $.dash-attribute;
 };
 
 class my-class does my-role {};
