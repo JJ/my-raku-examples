@@ -2,11 +2,15 @@
 
 use v6;
 
-role my-role {
-    has $.dash-attribute;
-};
+class my-class {
+    has $.dash-attribute is rw;
 
-class my-class does my-role {};
+    submethod BUILD(*%args) {
+	for %args.kv -> $k, $value {
+	    self."$k"( $value );
+	}
+    }
+};
 
 my $my-instance = my-class.new( dash-attribute => 'This is the attribute' );
 
