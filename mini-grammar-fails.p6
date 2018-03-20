@@ -6,7 +6,7 @@ grammar will-fail {
 }
 
 class will-fail-actions {
-    method TOP ($/ is copy) { my $v = ~$/ ~~ /foo/;  }	
+    method TOP ($/) { my $foo = ~$/; say $foo ~~ /foo/;  }	
 }
 
 my $parsed = will-fail.parse("fafoo", actions => will-fail-actions.new);
