@@ -6,6 +6,7 @@ my $count = 0;
 $c.send($_) for ^40;
 
 my $work = start react whenever $c -> $item {
+    $c.send( $item );
     say "This is $item";
 }
 
