@@ -1,22 +1,27 @@
 #!/usr/bin/env perl6
 
 my Channel $c .= new;
-$c.send($_) for ^20;
+$c.send($_) for ^40;
 $c.close;
 my Channel $c2 .= new;
 my $count = 100;
-my $work = start {
-    $c2.send: $_ for $c.List.rotor(2);
-    if ( $count++ < 100 ) {
-	$c.send( $count );
-    } else {
-	$c.close;
-    }
+
+my $work = start react whenever $c.List.rotor(2) -> @item {
+    $c2.send( @item );
     CATCH {
 	default {
 	    $c2.fail($_)
 	}
     }
 };
+
+my $more-work = start react whenever $c2 -> @item {
+    if ( $count++ < 100 ) {
+	$c.send( sum @item );
+    } else {
+	$c.close;
+    }
+
+}
 .say for $c2.List;
-await $work;
+await $more-work;
