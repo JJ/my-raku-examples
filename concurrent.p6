@@ -4,24 +4,20 @@ my Channel $c .= new;
 my Channel $c2 = $c.Supply.batch( elems => 2).Channel;
 my Channel $output .= new;
 my $count = 0;
-$c.send(1);
-$c.send(1);
-
-my $work = start react whenever $c -> $item {
-    $c.send( $item );
-    $output.send( $item );
-}
+$c.send(1) for ^2;
 
 my $more-work = start react whenever $c2 -> @item {
     if ( $count++ < 32 ) {
         $c.send( @item[1]);
-	$c.send( sum @item );
+	my $sum = sum @item;
+	$c.send( $sum );
+	$output.send( $sum ); 
     } else {
 	$c.close;
     }
 
 }
 await $more-work;
-.say for $output.List;
+.say for $output.list;
 
 
