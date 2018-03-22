@@ -10,7 +10,6 @@ my $more-work = start react whenever $c2 -> @item {
     if ( $count++ < 32 ) {
         $c.send( @item[1]);
 	my $sum = sum @item;
-	say $sum;
 	$c.send( $sum );
 	$output.send( $sum ); 
     } else {
@@ -19,6 +18,13 @@ my $more-work = start react whenever $c2 -> @item {
 
 }
 await $more-work;
-
+loop {
+    if my $item = $output.poll {
+	$item.say
+    } else {
+	$output.close;
+    }
+    if $output.closed  { last };
+}
 
 
