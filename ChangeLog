@@ -1,0 +1,4 @@
+2018-03-23  JJMerelo  <jmerelo@bojack>
+
+	* self-feeding-channels.p6: Concurrent processing for faster implementetion.
+
