@@ -4,10 +4,14 @@ use v6;
 
 use Pod::To::HTML;
 
-my $pod = q:to/END/;
+my $link="See L<https://modules.perl6.org/> .";
+my $pod=qq:to/END/;
 =pod
-See L<https://modules.perl6.org/> .
+$link
+=pod		    
+}
 END
+say $pod;
 
 use MONKEY-SEE-NO-EVAL;   
 say pod2html(EVAL($pod ~ "\n\$=pod"));
