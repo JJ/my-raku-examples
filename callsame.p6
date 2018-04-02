@@ -1,6 +1,6 @@
 #!/usr/bin/env perl6
 
-proto foo (|) {*}
+proto foo (|) {*};
 
 multi foo ( Any $n ) {
     say "Any";
