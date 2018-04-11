@@ -3,11 +3,11 @@
 use v6;
 use fatal;
 
-sub foo( @nums where { @nums ~~ Array[Int] } ) {
+sub foo( Int @nums ) {
     say @nums.join(" ");
 }
 
-sub bar( @nums where { @nums ~~ Array[UInt] } ) {
+sub bar( UInt @nums ) {
     say @nums.join(" ");
 }
 
