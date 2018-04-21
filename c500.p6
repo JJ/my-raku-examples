@@ -6,8 +6,8 @@ use v6;
 
 say "\c500";
 say "\c[500]";
-my $i = 500;
+my $i = "500";
 my $character = q"\c["~$i~"]";
 say $character ~~ Q"\c[500]";
 #say qq $character;
-#say "\c[$i]";
+say "\c[$i]";
