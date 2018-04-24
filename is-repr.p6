@@ -9,7 +9,7 @@ class p_timespec is repr('CStruct') {
     has long $.tv_nanosecs;
 }
     
-sub clock_gettime(uint32 $clock-id, p_timespec $tspec --> uint32) is native(Str) { * };
+sub clock_gettime(uint32 $clock-id, p_timespec $tspec --> uint32) is native(RatStr) { * };
 
 my p_timespec $this-time .=new;
 
