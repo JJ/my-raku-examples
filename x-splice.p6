@@ -10,7 +10,4 @@ EVAL q:to/END/;
     say quasi-ast;
 END
 
-CATCH {
-    # will definitely catch all the exception 
-    default { .perl.say ; }
-}
+
