@@ -19,6 +19,6 @@ my class TimeStruct is repr<CStruct> {
 }
 
 
-sub localtime(uint32 $epoch --> TimeStruct) is native {*}
-my uint32 $time = time;
+sub localtime(uint32 $epoch is rw --> TimeStruct) is native {*}
+my atomicint $time = time;
 dd localtime( $time );
