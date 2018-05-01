@@ -1,22 +1,22 @@
-grammar Letters {
+role Letters {
     token letters { \w+ }
 }
 
-grammar Quote-Quotes {
+role Quote-Quotes {
     token quote { "\""|"`"|"'" }
 }
 
-grammar Quote-Other {
+role Quote-Other {
     token quote { "|"|"/"|"¡" }
 }
 
-grammar Quoted-Quotes is Letters is Quote-Quotes {
+grammar Quoted-Quotes does Letters does Quote-Quotes {
     token TOP { ^  <quoted> $}
     token quoted { <quote>? <letters> <quote>?  } 
 
 }
 
-grammar Quoted-Other is Letters is Quote-Other {
+grammar Quoted-Other does Letters does Quote-Other {
     token TOP { ^  <quoted> $}
     token quoted { <quote>? <letters> <quote>?  } 
 
