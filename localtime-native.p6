@@ -5,17 +5,17 @@ use v6;
 use NativeCall;
 
 my class TimeStruct is repr<CStruct> {
-    has int32 $!tm_sec;
-    has int32 $!tm_min;
-    has int32 $!tm_hour;
-    has int32 $!tm_mday;
-    has int32 $!tm_mon;
-    has int32 $!tm_year;
-    has int32 $!tm_wday;
-    has int32 $!tm_yday;
-    has int32 $!tm_isdst;
-    has Str   $!tm_zone;
-    has long  $!tm_gmtoff;
+    has int32 $.tm_sec;
+    has int32 $.tm_min;
+    has int32 $.tm_hour;
+    has int32 $.tm_mday;
+    has int32 $.tm_mon;
+    has int32 $.tm_year;
+    has int32 $.tm_wday;
+    has int32 $.tm_yday;
+    has int32 $.tm_isdst;
+    has Str   $.tm_zone;
+    has long  $.tm_gmtoff;
 }
 
 
