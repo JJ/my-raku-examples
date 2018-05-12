@@ -29,16 +29,16 @@ sub MAIN( $path = ".", $extension = "p6" ) {
         }
     }
 
-    %metadata.keys.map: {
-        say $^þ, ", ",
-        %metadata{$^þ}<accessed modified age difference changed-tod changed-date>.join(", ");
+    %metadata.sort( { $^a.value<age> <=> $^b.value<age> } ).map: {
+        say $^x.key, ", ",
+        $^x.value<accessed modified age difference changed-tod changed-date>.join(", ");
     };
     %files-month.keys.sort.map: {
-        say "Month $^þ → %files-month{$^þ}"
+        say "Month $^x → %files-month{$^x}"
     };
 
     %files-period.keys.map: {
-        say "Period $^þ → %files-period{$^þ}"
+        say "Period $^x → %files-period{$^x}"
     },
 }
 
