@@ -8,6 +8,11 @@ sub MAIN( $path = ".", $extension = "p6" ) {
     my %files-month;
     my %files-period;
     for dir($path).grep( / \.$extension $/ ) -> $file {
+        CATCH {
+            when X::Temporal { say "Date-related problem", .payload }
+            when X::IO { say "File-related problem", .payload }
+            default { .payload.say }
+        }
         my Instant $modified = $file.modified;
         my Instant $accessed = $file.accessed;
         my $duration = $accessed - $modified;
