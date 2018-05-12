@@ -2,11 +2,11 @@
 
 use v6;
 
-sub MAIN( $path = "." ) {
+sub MAIN( $path = ".", $extension = "p6" ) {
 
     my %metadata;
     my DateTime $right = DateTime.now;
-    for dir($path).grep( / \.p6 $/ ) -> $file {
+    for dir($path).grep( / \.$extension $/ ) -> $file {
         my Instant $modified = $file.modified;
         my Instant $accessed = $file.accessed;
         my $duration = $accessed - $modified;
