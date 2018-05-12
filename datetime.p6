@@ -3,9 +3,8 @@
 use v6;
 
 sub MAIN( $path = ".", $extension = "p6" ) {
-
-    my %metadata;
     my DateTime $right = DateTime.now;
+    my %metadata;
     my %files-month;
     my %files-period;
     for dir($path).grep( / \.$extension $/ ) -> $file {
