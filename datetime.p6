@@ -15,7 +15,7 @@ sub MAIN( $path = ".", $extension = "p6" ) {
         }
         my Instant $modified = $file.modified;
         my Instant $accessed = $file.accessed;
-        my $duration = $accessed - $modified;
+        my Duration $duration = $accessed - $modified;
         my $age = $right - DateTime($accessed);
         my $time-of-day = $file.changed.DateTime.hh-mm-ss but Dateish;
         my $file-changed-date =  $file.changed.Date;
