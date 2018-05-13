@@ -2,10 +2,7 @@
 
 use v6;
 
-my $file = ‘foo’.IO;
-spurt $file, “and\nCamelia\n♡\nme\n”;
-
-my $p = Proc::Async.new("tail -f /var/log/syslog", :out);
+my $proc = Proc::Async.new("tail", "-f", "/var/log/syslog", :out);
  
 react {
     whenever $proc.stdout.lines { # split input on \r\n, \n, and \r 
