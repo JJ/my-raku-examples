@@ -18,6 +18,7 @@ sub MAIN( $path = ".", $extension = "p6" ) {
         my Duration $duration = $accessed - $modified;
         my $age = $right - DateTime($accessed);
         my $time-of-day = $file.changed.DateTime.hh-mm-ss but Dateish;
+        say $time-of-day.^name;
         my $file-changed-date =  $file.changed.Date;
         %metadata{$file} = %( modified => $modified,
                               accessed => $accessed,
@@ -43,7 +44,7 @@ sub MAIN( $path = ".", $extension = "p6" ) {
 
     %files-period.keys.map: {
         say "Period $^x → %files-period{$^x}"
-    },
+    };
 }
 
 
