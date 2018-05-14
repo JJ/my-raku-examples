@@ -5,6 +5,7 @@ use v6;
 my @array = "aaaaa" .. "fffff";
 my @search = "aaaa" .. "cccc";
 
-my $search = "/@search.join('|')/".EVAL;
+my $search = "@search.map( "\""~*~"\"").join('|')".EVAL;
+say $search;
 
-.put for @array .grep: * ~~ /^ <$search> /;
+.put for @array.grep: index( $search );
