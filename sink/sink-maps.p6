@@ -3,5 +3,5 @@
 use v6;
 
 <foo bar ber>.map: *.say;
-<foo bar ber>.map: { $^þ.comb.map: {$^ß.say}}
+say <foo bar ber>.map: { $($^þ.comb.map: *.say) };
 say <foo bar ber>.map: { $^þ.comb }
