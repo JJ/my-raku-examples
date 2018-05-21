@@ -18,3 +18,8 @@ sub count-a {
     return $count;
 }
 say count-a;
+
+
+my $word = "bananarama";
+say $word.index( "r", 0 );
+say index($word, "m", 0 );
