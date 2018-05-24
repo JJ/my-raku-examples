@@ -2,6 +2,8 @@
 
 
 my @arbitrary-numbers = ^100;
+my \U = @arbitrary-numbers.Set;
+my \Ø = ().Set;
 
 my @sets;
 
@@ -16,3 +18,14 @@ for @sets -> $set {
 
 say "Idempotent union is ", so @union.all;
 say "Idempotent intersection is ", so @intersection.all;
+
+my (@universe, @empty-set);
+
+for @sets -> $set {
+    @universe.push: $set ∪ U === U;
+    @empty-set.push: $set ∩ Ø === Ø;
+}
+
+say "Universe dominates ", so @universe.all;
+say "Empty set dominates ", so @intersection.all;
+
