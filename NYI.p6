@@ -4,9 +4,9 @@ use v6;
 
 class Nothing {
     method ventured( $sub, **@args) {
-        die X::NYI.new( feature => &?ROUTINE.name,
-                        did-you-mean => "gained",
-                        workaround => "Implement it yourself" );
+        X::NYI.new( feature => &?ROUTINE.name,
+                    did-you-mean => "gained",
+                    workaround => "Implement it yourself" ).throw;
     }
 }
 
