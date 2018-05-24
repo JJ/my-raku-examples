@@ -19,13 +19,17 @@ for @sets -> $set {
 say "Idempotent union is ", so @union.all;
 say "Idempotent intersection is ", so @intersection.all;
 
-my (@universe, @empty-set);
+my (@universe, @empty-set, @id-universe, @id-empty);
 
-for @sets -> $set {
-    @universe.push: $set ∪ U === U;
-    @empty-set.push: $set ∩ Ø === Ø;
+for @sets -> \A {
+    @universe.push: A ∪ U === U;
+    @id-universe.push: A ∩ U === A;
+    @empty-set.push: A ∩ Ø === Ø;
+    @id-empty.push: A ∪ Ø === A;
 }
 
 say "Universe dominates ", so @universe.all;
-say "Empty set dominates ", so @intersection.all;
+say "Empty set dominates ", so @empty-set.all;
+say "Identity with U ", so @id-universe.all;
+say "Identity with Ø ", so @id-empty.all;
 
