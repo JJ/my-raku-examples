@@ -10,11 +10,9 @@ my @sets;
 
 @sets.push: Set.new( @alphabet.pick( @alphabet.elems.rand)) for @alphabet;
 
-my $de-Morgan1 = True;
-my $de-Morgan2 = True;
+my ($de-Morgan1,$de-Morgan2) = (True,True);
 
 for @sets X @sets -> (\A, \B){
-    say $de-Morgan1;
     $de-Morgan1 &&= (A ∪ B)⁻  === A⁻ ∩ B⁻;
     $de-Morgan2 &&= (A ∩ B)⁻  === A⁻ ∪ B⁻;
 }
