@@ -17,3 +17,9 @@ my Int $u = 123;
 my Str $v = "123";
 efg $u;
 efg $v;
+
+sub xyz($n where $_ ~~ Int | Str ) { say +$n }
+xyz $u;
+xyz $v;
+xyz $t;
+xyz $s;
