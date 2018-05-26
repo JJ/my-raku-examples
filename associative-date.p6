@@ -2,10 +2,10 @@
 
 use v6;
 
-class Logger does Associative {
+class Logger does Associative[Cool,DateTime] {
     has %.store;
 
-    method log( $event ) {
+    method log( Cool $event ) {
         %.store{ DateTime.new( now ) } = $event;
     }
 
@@ -37,6 +37,7 @@ my $logger = Logger.new;
 $logger.log( "Stuff" );
 $logger.log( "More stuff");
 
+say $logger.of();
 say $logger.store;
 
 say $logger<2018-05-26>;
