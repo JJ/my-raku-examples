@@ -41,4 +41,8 @@ say $logger.store;
 
 say $logger<2018-05-26>;
 say $logger<2018-04-22>:exists;
-say $logger<2018-05-26> = 33;
+#say $logger<2018-05-26> = 33;
+
+my $bare-assoccer = Associative[Num,Str].new;
+
+say $bare-assoccer.of;
