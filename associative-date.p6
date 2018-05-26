@@ -2,7 +2,7 @@
 
 use v6;
 
-class Logger {
+class Logger does Associative {
     has %.store;
 
     method log( $event ) {
