@@ -32,12 +32,13 @@ class Logger does Associative[Cool,DateTime] {
 }
 
 
+say Logger.of;
 my $logger = Logger.new;
 
 $logger.log( "Stuff" );
 $logger.log( "More stuff");
 
-say $logger.of();
+say $logger.of;
 say $logger.store;
 
 say $logger<2018-05-26>;
