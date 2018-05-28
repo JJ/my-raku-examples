@@ -19,3 +19,11 @@ $Logger::logs( %(key => 42 ) );
 
 say $Logger::get( "2018-05-28");
 
+my $typer = -> $thing { $thing.^name ~ ' → ' ~ $thing };
+
+my $Logger::withtype = $Logger::logs ∘ $typer;
+
+$Logger::withtype( Pair.new( 'left', 'right' ));
+$Logger::withtype( ¾ );
+say $Logger::get( "2018-05-28" );
+
