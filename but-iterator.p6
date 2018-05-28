@@ -10,3 +10,5 @@ role Lastable {
 my %hash-plus := %( 3 => 33, 4 => 44) but Lastable;
 say %hash-plus.sort[0];
 say %hash-plus.last;
+
+say %hash-plus.^can("last");
