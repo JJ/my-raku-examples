@@ -7,7 +7,7 @@ my $logger = -> $event, $key = Nil  {
     if ( $event ) {
         %store{ DateTime.new( now ) } = $event;
     } else {
-        %store.keys.grep( /$key/ )
+        %store{ %store.keys.grep( /$key/ ) }
     }
 }
 
@@ -21,3 +21,7 @@ $clogger( "Clone stuff" );
 $clogger( "More clone stuff");
 
 say $clogger( Nil, "2018-05-28");
+
+my $gets-logs = $logger.assuming( Nil, * );
+$logger( %(changing => "Logs") );
+say $gets-logs( "2018-05-28" );
