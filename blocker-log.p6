@@ -2,7 +2,7 @@
 
 use v6;
 
-my $logger = -> $event, $key = Nil  {
+my $Logger = -> $event, $key = Nil  {
     state %store;
     if ( $event ) {
         %store{ DateTime.new( now ) } = $event;
@@ -11,17 +11,11 @@ my $logger = -> $event, $key = Nil  {
     }
 }
 
-$logger( "Stuff" );
-$logger( "More stuff");
+my $Logger::logs = $Logger.assuming( *, Nil );
+my $Logger::get = $Logger.assuming( Nil, * );
 
-say $logger( Nil, "2018-05-28");
+$Logger::logs( <an array> );
+$Logger::logs( %(key => 42 ) );
 
-my $clogger = $logger.clone;
-$clogger( "Clone stuff" );
-$clogger( "More clone stuff");
+say $Logger::get( "2018-05-28");
 
-say $clogger( Nil, "2018-05-28");
-
-my $gets-logs = $logger.assuming( Nil, * );
-$logger( %(changing => "Logs") );
-say $gets-logs( "2018-05-28" );
