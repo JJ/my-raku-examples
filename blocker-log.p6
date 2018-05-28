@@ -16,3 +16,8 @@ $logger( "More stuff");
 
 say $logger( Nil, "2018-05-28");
 
+my $clogger = $logger.clone;
+$clogger( "Clone stuff" );
+$clogger( "More clone stuff");
+
+say $clogger( Nil, "2018-05-28");
