@@ -3,6 +3,7 @@
 use v6;
 
 my $fh = "/tmp/bar".IO.open;
-my $lines = eager $fh.lines;
+my $lines = $fh.lines;
+say "Read $lines.elems() lines"; #reifying before closing handle
 close $fh;
-say $lines[0];
+say $lines[0]; # no problem!
