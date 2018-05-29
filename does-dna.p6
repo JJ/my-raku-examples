@@ -8,8 +8,8 @@ class DNA does Iterable {
         self.bless( :$chain );
     }
     
-    method iterator(DNA:D:){ $.chain.comb.iterator }
+    method iterator(DNA:D:){ $.chain.comb.rotor(3).iterator }
 };
 
-my $a := DNA.new('GAATC');
+my $a := DNA.new('GAATCC');
 .say for $a; 
