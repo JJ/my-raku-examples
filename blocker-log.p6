@@ -7,14 +7,17 @@ my &Logger = -> $event, $key = Nil  {
     if ( $event ) {
         %store{ DateTime.new( now ) } = $event;
     } else {
-        %store{ %store.keys.grep( /$key/ ) }
+        if $key ne "" {
+            %store{ %store.keys.grep( /$key/ ) }
+        } else {
+            %store;
+        }
     }
 }
 
 role Forable does Iterable {
     method iterator(&self:) {
-        say "self ", self;
-        self.CALL-ME( Nil, "" );
+        self( Nil, "" );
     }
 }
 
@@ -34,8 +37,7 @@ my &Logger::withtype = &Logger::logs ∘ $typer;
 Logger::withtype( ¾ );
 say Logger::get( "2018-05-29" );
 Logger::logs( "New one");
-say Logger( Nil, "" );
 
 &Logger does Forable;
 
-.say for Logger;
+.say for &Logger.iterator;
