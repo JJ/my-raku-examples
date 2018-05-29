@@ -2,15 +2,14 @@
 
 use v6;
 
-class DNA is Str does Iterable {
-    
-    method new ($str where { $str ~~ /^^ <[ACGT]>+ $$ / } ) {
-        self.bless( value => $str );
+class DNA does Iterable {
+    has $.chain;
+    method new ($chain where { $chain ~~ /^^ <[ACGT]>+ $$ / } ) {
+        self.bless( :$chain );
     }
     
-    method iterator(DNA:D:){ self.comb.iterator }
+    method iterator(DNA:D:){ $.chain.comb.iterator }
 };
 
-my $str = 'GAATCC';
-my $a := DNA.new($str);
+my $a := DNA.new('GAATC');
 .say for $a; 
