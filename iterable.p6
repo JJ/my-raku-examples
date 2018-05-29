@@ -11,5 +11,5 @@ class InnieMinnieMoe does Iterable {
 
 }
 
-my @imm = InnieMinnieMoe.new;
-.say for @imm;
+my $imm := InnieMinnieMoe.new;
+.say for $imm;
