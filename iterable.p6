@@ -2,7 +2,7 @@
 
 use v6;
 
-class InnieMinnieMoe does Iterable {
+role InnieMinnieMoe does Iterable {
     has @.IMM = <Innie Minnie Moe>;
 
     method iterator() {
@@ -11,5 +11,5 @@ class InnieMinnieMoe does Iterable {
 
 }
 
-my $imm := InnieMinnieMoe.new;
-.say for $imm;
+my @whatever does InnieMinnieMoe = "";
+.say for @whatever;
