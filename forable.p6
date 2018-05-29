@@ -11,7 +11,7 @@ my &logger = -> $event  {
     }
 }
 
-role Forable does Iterable {
+role Forable {
     method iterator(&self:) {
         self( Nil );
     }
@@ -21,6 +21,7 @@ role Forable does Iterable {
 logger( "One" );
 logger( "Two" );
 
-&logger does Forable;
+&logger does (Iterable,Forable);
 
-.say for &logger.iterator;
+say &logger.^name;
+.say for &logger;
