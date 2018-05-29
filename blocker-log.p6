@@ -40,4 +40,4 @@ Logger::logs( "New one");
 
 &Logger does Forable;
 
-.say for &Logger.iterator;
+.say for &Logger;
