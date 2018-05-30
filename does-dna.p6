@@ -27,6 +27,7 @@ class DNA does Iterable does Iterator {
 my $a := DNA.new('GAATCC');
 .say for $a;
 my $b := DNA.new("AAGCCT");
+.say for $b;
 
 my @longer-chain =  DNA.new('ACGTACGTT');
 say @longer-chain.perl;
