@@ -12,10 +12,11 @@ class DNA does Iterable does Iterator {
     
     method iterator( ){ self }
     method pull-one( --> Mu){
-        state $index = 0;
-        say "pull-one";
+        state $index;
+        $index //= 0;
+        say "pull-one $index";
         if $index < $.chain.chars {
-            my $codon = $.chain.comb.rotor(3)[$index %% 3];
+            my $codon = $.chain.comb.rotor(3)[$index div 3];
             $index += 3;
             return $codon;
         } else {
@@ -27,8 +28,6 @@ class DNA does Iterable does Iterator {
 my $a := DNA.new('GAATCC');
 .say for $a;
 my $b := DNA.new("AAGCCT");
-
-say $a [eq] $b;
 
 my @longer-chain =  DNA.new('ACGTACGTT');
 say @longer-chain.perl;
