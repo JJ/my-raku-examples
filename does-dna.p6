@@ -4,7 +4,9 @@ use v6;
 
 class DNA does Iterable {
     has $.chain;
-    method new ($chain where { $chain ~~ /^^ <[ACGT]>+ $$ / } ) {
+    method new ($chain where {
+                       $chain ~~ /^^ <[ACGT]>+ $$ / and
+                       $chain.chars %% 3 } ) {
         self.bless( :$chain );
     }
     
@@ -12,4 +14,10 @@ class DNA does Iterable {
 };
 
 my $a := DNA.new('GAATCC');
-.say for $a; 
+.say for $a;
+
+my @longer-chain =  DNA.new('ACGTACGTT');
+say @longer-chain.perl;
+say @longer-chain.^name;
+say @longer-chain.^mro;
+say  @longer-chain».join("").join("|");
