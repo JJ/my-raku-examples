@@ -2,7 +2,7 @@
 
 use v6;
 
-class DNA does Iterable {
+class DNA does Iterable does Iterator {
     has $.chain;
     method new ($chain where {
                        $chain ~~ /^^ <[ACGT]>+ $$ / and
@@ -10,14 +10,29 @@ class DNA does Iterable {
         self.bless( :$chain );
     }
     
-    method iterator(DNA:D:){ $.chain.comb.rotor(3).iterator }
+    method iterator( ){ self }
+    method pull-one( --> Mu){
+        state $index = 0;
+        say "pull-one";
+        if $index < $.chain.chars {
+            my $codon = $.chain.comb.rotor(3)[$index %% 3];
+            $index += 3;
+            return $codon;
+        } else {
+            return IterationEnd;
+        }
+    }
 };
 
 my $a := DNA.new('GAATCC');
 .say for $a;
+my $b := DNA.new("AAGCCT");
+
+say $a [eq] $b;
 
 my @longer-chain =  DNA.new('ACGTACGTT');
 say @longer-chain.perl;
 say @longer-chain.^name;
 say @longer-chain.^mro;
 say  @longer-chain».join("").join("|");
+
