@@ -15,4 +15,4 @@ my $str = "ACG GCT ACT An interesting chain";
 
 say $str ~~ /<[ACGT\s]>+ \s+ (<[A..Z a..z \s]>+)/;
 say $str ~~ /<[ACGT\s]>+: \s+ (<[A..Z a..z \s]>+)/;
-say $str ~~ m:g/[(<[ACGT]> **: 3) \s*]+ \s+ (<[A..Z a..z \s]>+)/;
+say $str ~~ m:g/[(<[ACGT]> ** 3) \s*]+ \s+ (<[A..Z a..z \s]>+)/;
