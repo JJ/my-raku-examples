@@ -10,3 +10,8 @@ my @tests = ('123', '@a', '1@b', '@a123');
 for @tests -> $t {
     say $t ~~ $regex;
 }
+
+my $str = "ACG GCT ACT An interesting chain";
+
+say $str ~~ /<[ACGT\s]>+ \s+ (<[A..Z a..z \s]>+)/;
+say $str ~~ /<[ACGT\s]>+: \s+ (<[A..Z a..z \s]>+)/;
