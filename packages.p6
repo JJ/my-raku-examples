@@ -17,4 +17,4 @@ my $bar = 'Bar';
 
 say $Foo::($bar)::quux;
 say Foo::Bar::<$quux>;
-say Foo::Bar::<&zape>
+
