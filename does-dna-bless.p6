@@ -15,6 +15,8 @@ class DNA is Str does Iterable {
 
 my $a := DNA.new('GAATCC');
 say $a.^name;
+say $a;
+say $a.^mro;
 .say for $a;
 my $b := DNA.new("AAGCCT");
 .say for $b;
