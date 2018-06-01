@@ -7,7 +7,7 @@ class DNA is Str does Iterable {
     method new ($chain where {
                        $chain ~~ /^^ <[ACGT]>+ $$ / and
                        $chain.chars %% 3 } ) {
-        self.bless( value => $chain );
+        self.bless( value => $chain ); # Calls Str.new, which needs this Associative
     }
     
     method iterator( ){ self.comb.rotor(3).list.iterator }
