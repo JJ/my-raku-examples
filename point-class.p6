@@ -20,7 +20,8 @@ class Str-with-ID is Str {
 }
 
 say Str-with-ID.new("1.1,2e2").ID;
-say Str-with-ID.new("3,4").ID;
+my $ided-str = Str-with-ID.new("3,4");
+say "$ided-str, {$ided-str.^name}, {$ided-str.ID}";
 
 
 
