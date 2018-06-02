@@ -5,10 +5,10 @@ use v6;
 class Task {
     has      &!callback;
     has Task @!dependencies;
-    has Bool $.done is rw = False;
+    has Bool $.done = False;
 
     # Normally doesn't need to be written
-    method new(&callback, *@dependencies) {
+    multi method new(&callback, *@dependencies) {
         return self.bless(:&callback, :@dependencies);
     }
     
@@ -28,7 +28,8 @@ class Task {
     }
 }
 
-my $shopping-list = Task.new({ say 'Created shopping list' });
+my $shopping-list = Task.new( callback => { say "No more"},
+                              dependencies => () );
 $shopping-list.perform;
 say $shopping-list.perl;
 
@@ -46,3 +47,4 @@ my $eat =
 
 say $eat.perl;
 $eat.perform();
+say $eat.perl;
