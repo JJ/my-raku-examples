@@ -7,13 +7,13 @@ class Str-with-ID is Str {
     has Str $.string;
     has Int $.ID;
 
-    method new( Str $string ) {
-        self.bless( :$string, ID => $.counter++ )
+    method TWEAK() {
+        $!ID = $.counter++;
     }
 }
 
-say Str-with-ID.new('First').ID;
-say Str-with-ID.new('Second').ID;
+say Str-with-ID.new(string => 'First').ID;
+say Str-with-ID.new(string => 'Second').ID;
 
 
 
