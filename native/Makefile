@@ -1,3 +1,3 @@
 
-libsimple-struct.so: simple-struct.c
-	gcc -shared -o libsimple-struct.so -fPIC simple-struct.c
+lib%.so: %.c
+	gcc -shared -o $@ -fPIC $<

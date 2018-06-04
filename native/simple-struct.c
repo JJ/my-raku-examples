@@ -1,6 +1,12 @@
 #include <stdint.h>
 #include <string.h>
 
+/* Compile with 
+
+    make libsimple-struct.so
+
+*/
+
 typedef struct a_string_and_an_int32_t_ {
   char *a_string;
   int32_t an_int32;
