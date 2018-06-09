@@ -16,7 +16,11 @@ multi sub add( Rat $a, Rat $b) is logger {
     $a + $b;
 }
 
+sub þor() is logger {}
+
 say add(1,2);
 say add(¾,½);
+say þor();
+
 say %store;
 
