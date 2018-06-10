@@ -4,8 +4,8 @@ use v6;
 use NativeCall;
 
 class myStruct is repr('CStruct') {
+    has int32 @.B[3] is CArray;
     has int32 $.A is rw;
-    has int32 @.B[3] is CArray is rw;
     has int32 $.C is rw;
 }
 
