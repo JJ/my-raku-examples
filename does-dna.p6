@@ -43,6 +43,8 @@ my $a := DNA.new('GAATCC');
 my $b := DNA.new("AAGCCT");
 .say for $b;
 
+for $b -> $a, $b, $c { say "Never mind" };
+
 my @dna-array = $b;
 say @dna-array;
 
