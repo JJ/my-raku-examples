@@ -22,6 +22,12 @@ class DNA does Iterable does Iterator {
             return IterationEnd;
         }
     }
+
+    method push-all(Iterator:D: $target) {
+        for $.chain.comb.rotor(3) -> $codon {
+            $target.push: $codon;
+        }
+    }
 };
 
 my $a := DNA.new('GAATCC');
@@ -29,9 +35,12 @@ my $a := DNA.new('GAATCC');
 my $b := DNA.new("AAGCCT");
 .say for $b;
 
+my @dna-array = $b;
+say @dna-array;
+
 my @longer-chain =  DNA.new('ACGTACGTT');
 say @longer-chain.perl;
 say @longer-chain.^name;
 say @longer-chain.^mro;
-say  @longer-chain».join("").join("|");
+say @longer-chain».join("").join("|");
 
