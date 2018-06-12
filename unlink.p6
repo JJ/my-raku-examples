@@ -10,3 +10,6 @@ say 'Removed: ', @unlinked-files;
 my @error-files = @files.Set (-) @unlinked-files.Set;
 
 say 'Problems: ', @error-files;
+
+'/var/log/dpkg.log.9.gz'.IO.unlink;
+
