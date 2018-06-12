@@ -28,6 +28,14 @@ class DNA does Iterable does Iterator {
             $target.push: $codon;
         }
     }
+
+    method push-exactly(Iterator:D: $target, int $count --> Mu) {
+        return IterationEnd if $.chain.elems / 3 < $count;
+        for ^($count) {
+            $target.push: $.chain.comb.rotor(3)[ $_ ];
+        }
+    }
+    
 };
 
 my $a := DNA.new('GAATCC');
@@ -37,6 +45,11 @@ my $b := DNA.new("AAGCCT");
 
 my @dna-array = $b;
 say @dna-array;
+
+my $þor := DNA.new("CAGCGGAAGCCT");
+for $þor -> $first, $second {
+    say "Coupled codons: $first, $second";
+}
 
 my @longer-chain =  DNA.new('ACGTACGTT');
 say @longer-chain.perl;
