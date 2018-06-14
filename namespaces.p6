@@ -7,4 +7,9 @@ my @name::calling = <1 3>;
 
 say MY::.keys;
 say OUR::.keys;
-say OUR::.perl
+
+my %name::sake::list = %("Juan Julián" => "JJ",
+			 "Guevara"     => "Ché" );
+
+say OUR::name::.keys;
+say OUR::name::sake::.keys;
