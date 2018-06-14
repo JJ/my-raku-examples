@@ -13,3 +13,11 @@ my %name::sake::list = %("Juan Julián" => "JJ",
 
 say OUR::name::.keys;
 say OUR::name::sake::.keys;
+
+my $foo::bar = 1;
+my $foo:bar<2> = 2;
+say MY::.keys;
+# OUTPUT: «($=pod !UNIT_MARKER EXPORT $_ $! ::?PACKAGE
+#          GLOBALish $¢ $=finish $/ $foo:bar $foo:bar<2>
+#          $?PACKAGE)␤»
+say OUR::.keys; # OUTPUT: «foo␤»
