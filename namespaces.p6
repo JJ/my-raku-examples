@@ -7,3 +7,4 @@ my @name::calling = <1 3>;
 
 say MY::.keys;
 say OUR::.keys;
+say OUR::.perl
