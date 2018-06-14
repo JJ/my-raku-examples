@@ -12,5 +12,8 @@ my $foo:bur;
 say $foo:bur.keys;
 say $foo:bar.kv;
 
+my $buz = "baz";
+my $bur::quux = 7;
+say $bur::($foo:bar<baz>);
 say MY::.keys;
 
