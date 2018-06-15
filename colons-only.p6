@@ -9,7 +9,8 @@ my $foo:bar<baz> = 'quux';
 say $foo:bar;
 say $foo:bar<2>;
 say $foo:bar.kv;
-say $foo:bar{'0'};
+say $foo:bar['2'];
+say $foo:bar«baz»;
 
 say MY::.keys;
 
