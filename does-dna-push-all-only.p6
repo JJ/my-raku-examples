@@ -5,7 +5,7 @@ use v6;
 class DNA does Iterable does Iterator {
     has $.chain;
     has Int $!index = 0;
-    
+
     method new ($chain where {
                        $chain ~~ /^^ <[ACGT]>+ $$ / and
                        $chain.chars %% 3 } ) {
@@ -22,40 +22,15 @@ class DNA does Iterable does Iterator {
             return IterationEnd;
         }
     }
-
+    
     method push-all(Iterator:D: $target) {
         for $.chain.comb.rotor(3) -> $codon {
             $target.push: $codon;
         }
     }
 
-    method push-exactly(Iterator:D: $target, int $count --> Mu) {
-        return IterationEnd if $.chain.elems / 3 < $count;
-        for ^($count) {
-            $target.push: $.chain.comb.rotor(3)[ $_ ];
-        }
-    }
-    
 };
 
-my $a := DNA.new('GAATCC');
-.say for $a;
 my $b := DNA.new("AAGCCT");
-.say for $b;
-
-for $b -> $a, $b, $c { say "Never mind" };
-
 my @dna-array = $b;
-say @dna-array;
-
-my $þor := DNA.new("CAGCGGAAGCCT");
-for $þor -> $first, $second {
-    say "Coupled codons: $first, $second";
-}
-
-my @longer-chain =  DNA.new('ACGTACGTT');
-say @longer-chain.perl;
-say @longer-chain.^name;
-say @longer-chain.^mro;
-say @longer-chain».join("").join("|");
-
+say @dna-array; # OUTPUT: «[(A A G) (C C T)]␤»
