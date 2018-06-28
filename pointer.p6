@@ -5,10 +5,14 @@ use v6;
 use NativeCall;
 
 sub strdup(Str $s --> Pointer[Str]) is native {*}
-sub puts(Pointer $p --> int32) is native {*}
-sub free(Pointer $p --> int32) is native {*}
+sub memcpy(Pointer[void] $destination, Pointer[void] $source, int32 $num --> Pointer[void] ) is native {*}
 
 my Pointer[Str] $p = strdup("Success!");
 say $p.deref;
-say 'puts returns ', puts($p);
-say 'free returns ', free($p);
+
+my Pointer[void] $source .= new;
+my Pointer[void] $p-void .= new ;
+
+#memcpy( $p-void, $source, 5 );
+
+#say $p-void;
