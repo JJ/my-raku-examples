@@ -3,15 +3,17 @@
 use v6;
 use NativeCall;
 
-sub malloc( int32 $size --> Pointer[void] ) is native { * };
-sub memcpy( Pointer[void] $source, Pointer[void] $destination, int32 $size ) is native { * };
+use NativeCall;
 
-my Pointer[void] $for-malloc = malloc( 32 );
-say $for-malloc.perl;
+sub malloc(size_t $size --> Pointer) is native {*}
+sub memcpy(Pointer $dest, Pointer $src, size_t $size --> Pointer) is native {*}
 
-my Blob $blob = Blob.new(0x22, 0x33);
-my Pointer[void] $src-memcpy = nativecast(Pointer[void], $blob);
-my Pointer[void] $dest-memcpy = malloc( 32 );
-memcpy($src-memcpy,$dest-memcpy,2);
-my Pointer[int] $inter = nativecast(Pointer[int], $dest-memcpy);
-say $inter;
+my $blob = Blob.new(0x22, 0x33);
+my $src = nativecast(Pointer, $blob);
+my $dest = malloc(nativesizeof(int16));
+memcpy($dest, $src, nativesizeof(int16));
+my $inter = nativecast(CArray[int16], $dest);
+
+
+.say for $inter.list;
+
