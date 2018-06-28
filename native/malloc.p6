@@ -2,6 +2,7 @@
 
 use v6;
 use NativeCall;
+use NativeHelpers::Blob;
 
 sub malloc(size_t $size --> Pointer) is native {*}
 sub memcpy(Pointer $dest, Pointer $src, size_t $size --> Pointer) is native {*}
@@ -12,13 +13,6 @@ my $dest = malloc( $blob.bytes );
 memcpy($dest, $src, $blob.bytes);
 my $inter = nativecast(Pointer[int8], $dest);
 
-my $cursor = $inter;
-
-my Buf $new-blob .= new() ;
-for 1..$blob.bytes {
-    $new-blob.append: $cursor.deref;
-    $cursor++;
-}
-
-say $new-blob;
+my $esponja = blob-from-pointer( $inter, :2elems, :type(Blob[int8]));
+say $esponja;
 
