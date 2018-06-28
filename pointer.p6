@@ -4,11 +4,11 @@ use v6;
 
 use NativeCall;
 
-sub strdup(Str $s --> Pointer) is native {*}
-sub puts(Pointer $p --> int32) is native {*}
-sub free(Pointer $p --> int32) is native {*}
+sub strdup(Str $s --> Pointer[Str]) is native {*}
+sub puts(Pointer[Str] $p --> int32) is native {*}
+sub free(Pointer[Str] $p --> int32) is native {*}
 
-my Pointer $p = strdup("Success!");
-say $p;
+my Pointer[Str] $p = strdup("Success!");
+say $p.deref;
 say 'puts returns ', puts($p);
 say 'free returns ', free($p);
