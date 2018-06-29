@@ -17,5 +17,6 @@ my $trip = Journey.new( :origin<Here>, :destination<There>,
 			travelers => <þor Freya> );
 
 $trip.notes("First steps");
-$trip.notes("Almost there");
+notes $trip: "Almost there";
+
 print $trip;
