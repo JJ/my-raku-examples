@@ -2,23 +2,20 @@
 
 use v6;
 
-my $error-code = "333";
 sub bad-sub {
     die "Something bad happened";
+    return "not returning";
 }
 
-# {
-#     $error-code = "222";
-#     bad-sub;
-# }
-
 try {
-    my $error-code = "111";
-    bad-sub;
-
+    my $return = bad-sub;
+    say "Returned $return";
     CATCH {
         default {
-            say "Error $error-code ", .^name, ': ',.Str
+            say "Error ", .^name, ': ',.Str;
+            $return = '0';
+            .resume;
+
         }
     }
 }
