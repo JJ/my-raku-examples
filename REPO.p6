@@ -1,11 +1,10 @@
 #!/usr/bin/env perl6
 
-say $*REPO.perl;
+use lib <../p6-wikidata-API/lib>;
 
-say $*REPO.repo-chain.perl;
+say $*REPO.perl;
 
 for $*REPO.repo-chain -> $repo {
     say $repo.perl;
 }
-
 
