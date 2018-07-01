@@ -13,5 +13,11 @@ class test1 {
     }
 }
 
-my test1 $t .= new;
-say $t.test;
+
+class A is repr('CStruct') is export {
+  has Pointer[void] $.wrongdoer;
+  has int32 $.a;
+}
+
+my A $a .= new;
+say $a.perl;
