@@ -7,7 +7,7 @@ sub bad-sub {
     return "not returning";
 }
 
-try {
+{
     my $return = bad-sub;
     say "Returned $return";
     CATCH {
