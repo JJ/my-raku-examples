@@ -2,4 +2,10 @@
 
 say $*REPO.perl;
 
-say PROCESS::<$REPO>.perl;
+say $*REPO.repo-chain.perl;
+
+for $*REPO.repo-chain -> $repo {
+    say $repo.perl;
+}
+
+
