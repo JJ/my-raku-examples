@@ -4,16 +4,18 @@ use v6;
 
 proto how-many(|) {*}
 
-multi sub how-many( Pair $a, Pair $b ) {
-    say "Int $a and $b";
-    return "There are $a and $b"
-    
-}
-multi sub how-many( $a, $b ) {
-    say "Not int $a and $b";
-    my $calling = samewith( 1 => $a, 2 => $b );
+multi how-many( Any $a ) {
+    say "Not int $a ";
+    my $calling = callwith( 1 => $a );
     return $calling;
 }
 
-say how-many( "little piggie","littler piggie" );
+multi how-many( Pair $a ) {
+    say "Int $a ";
+    return "There is $a "
+    
+}
+
+
+say how-many( "little piggie" );
 
