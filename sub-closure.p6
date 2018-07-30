@@ -3,7 +3,7 @@
 use v6;
 
 sub can-be-seener( $whatever ) {
-    sub can-be-seen ( $objection ) {
+    my sub can-be-seen ( $objection ) {
         return $whatever but $objection;
     }
     return &can-be-seen
