@@ -2,7 +2,7 @@
 
 use v6;
 
-my $x is context = 5;
+my $x is dynamic = 5;
 mySubroutine(7);
 
 sub mySubroutine($x) {
