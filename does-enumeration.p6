@@ -1,30 +1,32 @@
 #!/usr/bin/env perl6
 
 class DNA does Enumeration {
-    my $DNAindex = 0;
     my %pairings = %( A => "T",
                       T => "A",
                       C => "G",
-                      G => "T" );
+                      G => "C" );
     
     method new( $base-pair where "A" | "C" | "G" | "T" )  {
         self.bless( key => $base-pair,
-                    value => %pairings{$base-pair},
-                    index => 33);
+                    value => %pairings{$base-pair});
     }
-
-    submethod BUILD( :$!key, :$!value, :$!index ) {};
 
     multi method gist(::?CLASS:D:) {
-        return "$!key -> $!value with $!index";
+        return "$!key → $!value";
     }
 
 }
 
-for <A C G T>.roll( 16 ) -> $letter {
+enum Chain ();
+constant length = 16;
+for <A C G T>.roll( length ) -> $letter {
     my DNA $base = DNA.new( $letter );
-    say " Pairs", $base.pair,  " with ", $base.gist;
+    say "Pairs ", $base.pair;
+    Chain.HOW.add_enum_value( Chain, $base );
 }
 
-
+for ^length {
+    my $base = Chain.pick;
+    say "{$base.key} and {$base.value}";
+}
 
