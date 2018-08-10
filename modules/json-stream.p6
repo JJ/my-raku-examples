@@ -2,10 +2,6 @@
 
 use v6;
 
-say "random.txt".IO.slurp;
-
-react whenever "random.txt".IO.Supply: :5size  {
-    .say ;
-}
+"random.txt".IO.open.Supply.tap: { .perl.say };
 
 
