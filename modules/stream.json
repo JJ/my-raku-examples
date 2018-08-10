@@ -1,0 +1,60 @@
+{
+  "level": 1,
+  "THREAD": {
+    "0": null
+  },
+  "msg": "innie",
+  "frame": {
+    "0": null
+  },
+  "when": "2018-08-10T09:54:17.032026+02:00",
+  "ctx": null
+}
+{
+  "level": 2,
+  "THREAD": {
+    "0": null
+  },
+  "msg": "minnie",
+  "frame": {
+    "0": null
+  },
+  "when": "2018-08-10T09:54:17.033769+02:00",
+  "ctx": null
+}
+{
+  "level": 4,
+  "THREAD": {
+    "0": null
+  },
+  "msg": "moe",
+  "frame": {
+    "0": null
+  },
+  "when": "2018-08-10T09:54:17.034633+02:00",
+  "ctx": null
+}
+{
+  "level": 3,
+  "THREAD": {
+    "0": null
+  },
+  "msg": "oe",
+  "frame": {
+    "0": null
+  },
+  "when": "2018-08-10T09:54:17.035165+02:00",
+  "ctx": null
+}
+{
+  "level": 6,
+  "THREAD": {
+    "0": null
+  },
+  "msg": "e",
+  "frame": {
+    "0": null
+  },
+  "when": "2018-08-10T09:54:17.035567+02:00",
+  "ctx": null
+}
