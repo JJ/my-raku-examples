@@ -9,6 +9,6 @@ my $odd-iterator = @multiples-of-five.iterator;
 my $odd;
 repeat {
     $odd-iterator.skip-one;
-    $odd = $odd-iterator.pull-one;
+    $odd := $odd-iterator.pull-one;
     say "→ $odd";
-} until $odd.Str eq IterationEnd.Str;
+} until $odd =:= IterationEnd;
