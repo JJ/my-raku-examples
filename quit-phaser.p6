@@ -19,12 +19,11 @@ react {
                 END
             $conn.close;
         }
-        QUIT {
-            default {
-                say .^name, '→ ', .Str;
-                say "handled in line $?LINE";
-            }
+    }
+    CATCH {
+        default {
+            say .^name, ': ', .Str;
+            say "handled in $?LINE";
         }
     }
-    
 }
