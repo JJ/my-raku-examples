@@ -18,3 +18,17 @@ my @diagonal = gather {
     };
 }
 say @diagonal;
+
+my @just-three[3] = <alpha betta kappa>;
+say @just-three.perl;
+say @just-three.Array;
+my @two-by-two = (4,3;2,1);
+say @two-by-two.Array;
+
+my @a[2;2] = (1,2; 3,4);
+say @a.Array;
+@a[1;1] = 42;
+say @a.perl;
+
+my @just-two[2] = <alpha betta kappa>;
+
