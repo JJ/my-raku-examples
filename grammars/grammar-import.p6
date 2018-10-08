@@ -4,7 +4,8 @@ use v6;
 
 
 grammar Word {
-    token TOP { ^ <letters> $}
+    token TOP { ^ <numbers> $}
+    regex numbers   is export { <[\d]>+ };
     our regex letters   is export { <[\w] - [_]>+ };
     sub exported () is export  { return 'exported' };
 }
@@ -13,7 +14,14 @@ grammar Word {
 # my $parsed = Word.parse($quoted);
 # say $parsed;
 
+say Word.^lookup("new").perl;
+say Word.^lookup("letters").perl;
+say Word.^lookup("numbers").signature;
+say Word.^lookup("exported").perl;
+say Word.^lookup("TOP").perl;
 import Word;
 
 say exported;
 say "what_ever" ~~ /<letters>/;
+
+say Word.parse( "123" );
