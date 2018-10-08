@@ -5,7 +5,7 @@ use v6;
 
 grammar Word {
     token TOP { ^ <letters> $}
-    regex letters   is export { <[\w] - [_]>+ };
+    our regex letters   is export { <[\w] - [_]>+ };
     sub exported () is export  { return 'exported' };
 }
 
