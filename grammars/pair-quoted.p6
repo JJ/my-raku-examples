@@ -1,5 +1,9 @@
-use Grammar::Tracer;
-grammar Pair-Quoted {
+#!/usr/bin/env perl6
+
+use v6;
+
+
+my grammar Pair-Quoted {
     token TOP { ^ <letters> | <quoted> $}
     proto token quoted {*}
     token quoted:sym<em> { '*' ~ '*' <letters> }
@@ -13,3 +17,6 @@ my $quoted = "_enhanced_";
 my $parsed = Pair-Quoted.parse($quoted);
 say $parsed;
 
+import Pair-Quoted 'letters';
+
+say "what_ever" ~~ /<letters>/;
