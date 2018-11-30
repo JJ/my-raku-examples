@@ -179,4 +179,83 @@ the declared function and the comment. However, `contents` and
 `config` are empty. Which they shouldn't.
 
 What's more, the little bit of actual formatting used in the comment
-does not work. Now it was Santa who was not happy. 
+does not work. Not to mention the actual module was not really
+documented. Now it was Santa who was not happy.
+
+## Adding documentation to a module.
+
+Writing documentation is probably the first thing you should do before
+writing the actual code. Documentation is for the module clients, but
+first and foremost, it's a guide for the author, a roadmap of what the
+module should do and how it should do it. As seen above, documenting
+individual methods or routines is quite easy with Pod 6; however, a
+*big picture* view of the module is also convenient. And here's the
+Pod for `Santa-Letter`
+
+```perl6
+=begin pod
+
+=head1 NAME
+
+Santa-Letter - A grammar for letters to Santa for the L<Perl 6 Advent Calendar|https://perl6advent.wordpress.com>
+
+=head1 SYNOPSIS
+
+Parses letters formatted nicely and written by all good kids in the world.
+
+=end pod
+```
+
+Conveniently placed at the end of the file, when invoked with `perl6
+--doc Santa-Letter.pm6`, or simply `perl6 --doc Santa-Letter` if it
+has been installed, or even `p6doc Santa-Letter` if the `perl6/doc`
+is present, will write something like:
+
+```
+NAME
+
+Santa-Letter - A grammar for letters to Santa for the Perl 6 Advent
+Calendar
+
+SYNOPSIS
+
+Parses letters formatted nicely and written by all good kids in the
+world.
+```
+
+But you will notice here that there was a piece of markup that has
+been eliminated in this type of output. `L<>` creates links, but it
+obviously does so only if the output format supports that. So let's
+try one of those:
+
+    perl6 --doc=HTML Santa-Letter.pm6
+
+will output a good amount of code, among which this line:
+
+    <p>Santa-Letter - A grammar for letters to Santa for the <a href="https://perl6advent.wordpress.com">Perl 6 Advent Calendar</a></p>
+
+clearly shows the output of the link.
+
+As a matter of fact, this command will use the `Pod::To::HTML` module
+to convert the Pod data structures to HTML. Using any other thing will
+call the corresponding module.
+
+<!-- Talk about the available modules -->
+
+This documentation, besides, follows the convention used in all
+modules. `NAME` should describe the name and a short oneliner that
+tells what the module is about, while `SYNOPSIS` includes a longer
+description. While that's good, a real piece of documentation should
+include examples.
+
+```perl6
+=begin code
+
+use Santa-Letter;
+
+say Santa-Letter.parse("Dear Santa\nAll I want for Christmas\nIs you\n Mariah");
+
+=end code
+```
+
+
