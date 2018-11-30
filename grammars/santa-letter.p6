@@ -7,6 +7,10 @@ grammar Paragraph {
     token enhanced-word { <word> (\,|\.|\:)? }
 }
 
+grammar Dear {
+    token TOP {Dear \s+ [S|s]anta [\,|\:]? }
+}
+
 grammar Santa-Letter is Paragraph {
     token TOP { <dear> <paragraph> [ (\v+) <paragraph>]+ <signature>}
     token dear { \v+ Dear \s+ [Ss]anta \,|\: \v }
@@ -15,7 +19,8 @@ grammar Santa-Letter is Paragraph {
 }
 
 sub MAIN ( Str $file = "letter.txt" ) {
-    say Paragraph.parse("This would be a paragraph, that would be.");
+#    say Paragraph.parse("This would be a paragraph, that would be.");
+    say Dear.parse("Dear Santa:");
     my $letter =$file.IO.slurp;
     my $parsed = Santa-Letter.parse($letter);
     say $parsed;
