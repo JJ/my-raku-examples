@@ -1,7 +1,5 @@
 Dear Santa:
 
-I've been a good boy, so I want a Perl 6 Advent Calendar full of articles.
+I have been a good boy, so I want a Perl 6 Advent Calendar full of articles.
 
-Yours sincerely,
 
-JJ
