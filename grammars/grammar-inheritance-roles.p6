@@ -22,6 +22,8 @@ grammar Quoted-Other does Letters does Quote-Other {
 
 }
 
+say '"letras"' ~~ Quoted-Quotes.quoted;
+
 my $quoted = q{"enhanced"};
 my $parsed = Quoted-Quotes.parse($quoted);
 say $parsed<quoted>;
