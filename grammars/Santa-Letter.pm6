@@ -2,6 +2,8 @@
 
 unit grammar Santa-Letter;
 
+say $=pod[0].perl;
+
 token TOP { <dear> \v+ <paragraph> [\v+ <paragraph>]* \v+ <signature>\v*}
 token paragraph { <superword>[ \h+ <superword>]+ }
 token superword { <word> | <enhanced-word> }
