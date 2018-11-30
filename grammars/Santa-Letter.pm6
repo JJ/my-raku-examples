@@ -10,6 +10,15 @@ token enhanced-word { <word> [\,|\.|\:] }
 token dear {Dear \h+ [S|s]anta [\,|\:]? }
 token signature {\h+ \w+ \h* \w* }
 
+=begin pod
 
+=head1 NAME
+Santa-Letter - A grammar for letters to Santa for the L<Perl 6 Advent Calendar|https://perl6advent.wordpress.com>
+
+=head1 SYNOPSIS
+
+Parses letters formatted nicely and written by all good kids in the world.
+
+=end pod
 
 

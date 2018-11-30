@@ -131,6 +131,52 @@ system, based entirely in free software, and he requested more
 documentation and assigned the task to Santa. Santa protested loudly,
 but complied.
 
+```perl6
+#|{ This reads a letter file in text format.
+With no arguments, it will read the C<letter.txt> file.
+}
+sub MAIN ( Str $file = "letter.txt" ) {
+    my $letter =$file.IO.slurp;
+    my $parsed = Santa-Letter.parse($letter);
+    say $parsed<signature>.trim;
+    say $=pod[0].perl;
+}
+```
 
+This printed the same message when invoked with `--help`. And it was
+documentation. When running
 
+    perl6 --doc get-signed.p6
 
+it printed:
+
+```
+sub MAIN(
+	Str $file = "letter.txt", 
+)
+This reads a letter file in text format. With no arguments, it will read the C<letter.txt> file.
+```
+
+So Perl 6 understands the comment and the code attached to it, and
+automatically pretty-prints both. Documenting a routine  is as easy as
+this.
+
+Besides, when run on an actual file, the last sentence kicked it, and
+it printed:
+
+```
+Pod::Block::Declarator.new(WHEREFORE => sub MAIN (Str $file = "letter.txt") { #`(Sub|81308800) ... }, config => {}, contents => [])
+```
+
+Unlike other DSLs used for comments in other languages, such as
+Markdown or Pod itself in Perl 5, Pod 6 not only is a DSL for
+comments, it's part of Perl 6 itself, and thus, it's interpreted by
+the Perl 6 parser, its internal structures available for introspection
+in the `$=pod` variable. In this case, the comment is a
+[`Pod::Block::Declarator`](https://docs.perl6.org/type/Pod::Block::Declarator),
+and that data structure includes the `WHEREFORE` key which contains
+the declared function and the comment. However, `contents` and
+`config` are empty. Which they shouldn't.
+
+What's more, the little bit of actual formatting used in the comment
+does not work. Now it was Santa who was not happy. 
