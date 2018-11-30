@@ -95,6 +95,42 @@ Santa-Letter grammar and set down to work on it. Using, of course, Pod
 
 And it (clearly) not an
 acronym. [Pod6](https://docs.perl6.org/language/pod) is a DSL that helps Perl 6 coders
-write documentation. It's a markup language that use `=` to start
-commands and `<>` for paragraph-level markup. 
+write documentation. It's a markup language that uses `=` to start
+commands and `<>` for paragraph-level markup. We'll get to that, but
+for the time being, Santa realized that one of the best things was how
+it integrates with Perl 6 itself. So he did a second iteration of his
+examining program thus:
+
+```perl6
+#| This reads a letter file
+sub MAIN ( Str $file = "letter.txt" ) {
+    my $letter =$file.IO.slurp;
+    my $parsed = Santa-Letter.parse($letter);
+    say $parsed<signature>.trim;
+}
+```
+
+There's a funny sign, `|`, in that comment. That sign ties it to the
+code behind the comment. And in this case, it's the `MAIN` sub.
+
+Santa released to production the program. The IT elf tried to run the
+program,
+
+	./get-signed.p6 --help
+
+and he obtained:
+
+```
+Usage:
+  ./get-signed.p6 [<file>] -- This reads a letter file
+```
+
+"Some documentation is better than no documentation", he thought. But
+that was not nearly enough. He entered the North Pole ticketing
+system, based entirely in free software, and he requested more
+documentation and assigned the task to Santa. Santa protested loudly,
+but complied.
+
+
+
 
