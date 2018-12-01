@@ -238,9 +238,17 @@ clearly shows the output of the link.
 
 As a matter of fact, this command will use the `Pod::To::HTML` module
 to convert the Pod data structures to HTML. Using any other thing will
-call the corresponding module.
+call the corresponding module, and there are [many modules available
+on the ecosystem](https://modules.perl6.org/search/?q=pod%3A%3Ato). For
+instance,
+[`Pod::To::Pager`](https://gitlab.com/tyil/perl6-pod-to-pager) will
+use the system's pager to make stuff a bit more beautiful.
 
-<!-- Talk about the available modules -->
+    perl6 --doc=Pager Santa-Letter.pm6 
+
+will result in this
+
+![Output through pager](img/pager.png)
 
 This documentation, besides, follows the convention used in all
 modules. `NAME` should describe the name and a short oneliner that
@@ -258,4 +266,37 @@ say Santa-Letter.parse("Dear Santa\nAll I want for Christmas\nIs you\n Mariah");
 =end code
 ```
 
+Examples are included in `code` blocks, which from the point of view
+of Pod6,
+are [`Pod::Block::Code`](https://docs.perl6.org/type/Pod::Block::Code)
+objects. Which is a nice thing, actually. Let's add this little
+snippet of code to our grammar:
 
+    our $pod = $=pod[0];
+
+Grammars are classes, and they have class-scoped variables. We can't
+export the `$=pod` variable to avoid clashing with others, but we can
+export it and then use it from our program that:
+
+    say $Santa-Letter::pod.perl;
+
+Or, even better,
+install [`Data::Dump`](https://github.com/tony-o/perl6-data-dump) and
+write something like this:
+
+    say Dump( $Santa-Letter::pod, :indent(4), :3max-recursion );
+    
+which uses the `pod` class variable we have declared, and prints it
+this way:
+
+![Pod structure: POM](img/structure.png)
+
+This tree, which could be called the POM (Pod Object Model), includes,
+besides the known `name` and `config` metadata that goes with every
+block, an array of Pod6 blocks at the same level. Every one has the
+generic attributes plus specific attributes, like `level` in the case
+of [headings](https://docs.perl6.org/type/Pod::Heading). Anyway, the
+interesting thing is that the code itself we are using as an example
+is available as `contents` of the `Pod::Block::Code` object.
+
+"Hum", thought Santa. We could do one better with this.
