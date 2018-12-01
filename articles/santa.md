@@ -391,3 +391,13 @@ semicolon back in the examples, and the module documentation passed
 the test with flying colors.
 
 ## Back to production
+
+Provided with
+this
+[documentated module](https://github.com/JJ/my-perl6-examples/blob/master/grammars/Santa-Letter.pm6),
+the IT elf was moderately happy and his ears stopped quivering and
+reddening. Rudolf was soundly asleep, and now he would have to write
+the bridge between the letter-receiving microservice and the customer
+relationship macroservice. He would probably
+use [Cro](https://cro.services/) for that, but that's a topic for
+another day. 
