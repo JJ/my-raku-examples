@@ -300,4 +300,94 @@ interesting thing is that the code itself we are using as an example
 is available as `contents` of the `Pod::Block::Code` object.
 
 "Hum", thought Santa. We could do one better with this. Can we
-actually check that the included code works? Yes we can!
+actually check that the included code works? Yes we can! Let's expand
+the `SYNOPSIS` section:
+
+```perl6
+=head1 SYNOPSIS
+
+Parses letters formatted nicely and written by all good kids in the world.
+
+=begin code
+
+use Santa-Letter;
+
+say Santa-Letter.parse("Dear Santa\nAll I want for Christmas\nIs you\n Mariah");
+
+=end code
+
+You can also access particular elements in the letter, as long as they are included on the grammar
+
+    my $letter="Dear Santa,\nI have not been that good.\nJust a paper clip will do\n Donald"
+    say Santa-Letter.parse($letter)<signature>
+
+Also
+
+=for code :notest :reason("Variable defined above")
+say "The letter signed by ", Santa-Letter.parse($letter)<signature>,
+    " has ", Santa-Letter.parse($letter)<paragraph>.elems, " paragraphs";
+    
+=end pod
+```
+
+Code can be represented in different ways in a Pod. The first is
+known; the second uses simply indentation, *à la* Markdown, to denote
+the same thing. We can also
+use [`=for`](https://docs.perl6.org/language/pod#Paragraph_blocks)
+paragraph blocks, which is declared in this case with the `code` type
+and will continue until the next blank line. It's an abbreviated way
+that does not need tne `=end` directive. But there's something more
+there: the configuration variables `:notest :reason("Variable defined
+above")`. These configuration variables are arbitrary, and we can add
+as many as we want. They will go to the `config` attribute of the
+block, and we can work with them. That's exactly what we will do in
+this script that will process the code examples:
+
+```perl6
+for $Santa-Letter::pod.contents -> $block {
+    next if $block !~~ Pod::Block::Code;
+    if $block.config<notest> {
+        say "→ Block\n\t"~ $block.contents
+            ~ "\n\t❈ Not tested since \'" ~ $block.config<reason> ~ "\'";
+    } else {
+        my $code = $block.contents.join("");
+        say "→ Block\n\t"~ $block.contents;
+        try {
+            EVAL $code;
+        }
+        if ( $! ) {
+            say "\n\t✘ Produces error \"$!\"", "\n" xx 2;
+        } else {
+            say "✔ is OK\n";
+        }
+    }
+}
+```
+
+As we have seen in the structure above, the `contents` attribute will
+include an array of first-level Pod blocks, which in our case include
+all the three blocks we want to evaluate (or maybe not). Non-code
+blocks are skipped (but could be checked for spelling, too). We do two
+interesting things here: we check for the `notest` flag in the
+configuration via `$block.config<notest>`, and we print some note if
+that's the case, but if it should be tested, then it's `EVAL`ed (we
+need the `use MONKEY-SEE-NO-EVAL` pragma for that.
+
+Santa runs that on the documentation, and lo and behold!
+
+```
+→ Block
+	my $letter="Dear Santa,\nI have not been that good.\nJust a paper clip will do\n Donald"
+say Santa-Letter.parse($letter)<signature>
+
+	✘ Produces error "Two terms in a row across lines (missing semicolon or comma?)"(
+ 
+)
+```
+
+He was at once happy and humbled. A simple semicolon was spoiling the
+quality of the examples. It's always the semicolon. He put the
+semicolon back in the examples, and the module documentation passed
+the test with flying colors.
+
+## Back to production

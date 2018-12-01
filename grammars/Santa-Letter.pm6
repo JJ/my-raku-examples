@@ -32,7 +32,7 @@ say Santa-Letter.parse("Dear Santa\nAll I want for Christmas\nIs you\n Mariah");
 
 You can also access particular elements in the letter, as long as they are included on the grammar
 
-    my $letter="Dear Santa,\nI have not been that good.\nJust a paper clip will do\n Donald"
+    my $letter="Dear Santa,\nI have not been that good.\nJust a paper clip will do\n Donald";
     say Santa-Letter.parse($letter)<signature>
 
 Also
