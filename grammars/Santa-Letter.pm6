@@ -2,7 +2,7 @@
 
 unit grammar Santa-Letter;
 
-say $=pod[0].perl;
+our $pod = $=pod[0];
 
 token TOP { <dear> \v+ <paragraph> [\v+ <paragraph>]* \v+ <signature>\v*}
 token paragraph { <superword>[ \h+ <superword>]+ }
