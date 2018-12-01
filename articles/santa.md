@@ -69,7 +69,7 @@ him, in so many words, to do that kind of thing.
 
 After that speech, the IT elf stood there, his ears aquiver.
 
-"What?", santa growled. In a hallowed way, of course.
+"What?", Santa growled. In a hallowed way, of course.
 
 The pointed part of the ears reddened and, with the quivering,
 irradiated heat so that a small icicle melted and fell down to the
@@ -336,7 +336,7 @@ the same thing. We can also
 use [`=for`](https://docs.perl6.org/language/pod#Paragraph_blocks)
 paragraph blocks, which is declared in this case with the `code` type
 and will continue until the next blank line. It's an abbreviated way
-that does not need tne `=end` directive. But there's something more
+that does not need the `=end` directive. But there's something more
 there: the configuration variables `:notest :reason("Variable defined
 above")`. These configuration variables are arbitrary, and we can add
 as many as we want. They will go to the `config` attribute of the
@@ -394,10 +394,14 @@ the test with flying colors.
 
 Provided with
 this
-[documentated module](https://github.com/JJ/my-perl6-examples/blob/master/grammars/Santa-Letter.pm6),
+[documented module](https://github.com/JJ/my-perl6-examples/blob/master/grammars/Santa-Letter.pm6),
 the IT elf was moderately happy and his ears stopped quivering and
-reddening. Rudolf was soundly asleep, and now he would have to write
+reddening. He could also use documentation for every
+one of the tokens, but enough was enough and at least he had some
+examples to get the application going. 
+Rudolf was soundly asleep, and now he would have to write
 the bridge between the letter-receiving microservice and the customer
-relationship macroservice. He would probably
+relationship macroservice. 
+He would probably
 use [Cro](https://cro.services/) for that, but that's a topic for
 another day. 
