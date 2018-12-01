@@ -299,4 +299,5 @@ of [headings](https://docs.perl6.org/type/Pod::Heading). Anyway, the
 interesting thing is that the code itself we are using as an example
 is available as `contents` of the `Pod::Block::Code` object.
 
-"Hum", thought Santa. We could do one better with this.
+"Hum", thought Santa. We could do one better with this. Can we
+actually check that the included code works? Yes we can!
