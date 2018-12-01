@@ -1,0 +1,316 @@
+<h1><a id="user-content-like-6-perls-in-a-pod-document-everything" class="anchor" aria-hidden="true" href="#like-6-perls-in-a-pod-document-everything"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Like 6 Perls in a Pod: document everything</h1>
+<p>Christmas season was approaching, and Santa was in a gloomy
+mood. His inbox was full with letters from boys and girls coming from
+all over.</p>
+<p>But.</p>
+<p>Were they letter to Santa? Was the kid properly identified by signature, so that
+you sent the gifts to the proper person and not someone else who might
+not deserve them? Were them addressed to Santa, and not any of those
+impostors, the Easter Bunny, or, even worse, the Three
+So-Called-I-don't-know-why-Wise-Men from Orient? Worst of all, did
+<em>he</em> personally have to check all that stuff all by his royal and
+hallowed self?</p>
+<p>No.</p>
+<p>Perl 6 came to the rescue with the following
+<a href="https://docs.perl6.org/syntax/Creating%20grammars" rel="nofollow">grammar</a>:</p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace">unit <span style="color: blue;">grammar</span> <span class="pl-en">Santa-Letter</span>;
+
+<span style="color: blue;">token</span> <span class="pl-en">TOP</span> { &lt;<span style="color: #440;">dear</span>&gt; <span class="pl-cce">\v</span><span style="color: blue;">+</span> &lt;<span style="color: #440;">paragraph</span>&gt; [<span class="pl-cce">\v</span><span style="color: blue;">+</span> &lt;<span style="color: #440;">paragraph</span>&gt;]<span style="color: blue;">*</span> <span class="pl-cce">\v</span><span style="color: blue;">+</span> &lt;<span style="color: #440;">signature</span>&gt;<span class="pl-cce">\v</span><span style="color: blue;">*</span>}
+<span style="color: blue;">token</span> paragraph { &lt;<span style="color: #440;">superword</span>&gt;[ <span class="pl-cce">\h</span><span style="color: blue;">+</span> &lt;<span style="color: #440;">superword</span>&gt;]<span style="color: blue;">+</span> }
+<span style="color: blue;">token</span> superword { &lt;<span style="color: #440;">word</span>&gt; <span style="color: #449;">|</span> &lt;<span style="color: #440;">enhanced</span><span style="color: blue;">-</span><span style="color: #440;">word</span>&gt; }
+<span style="color: blue;">token</span> word { <span class="pl-cce">\w</span><span style="color: blue;">+</span> }
+<span style="color: blue;">token</span> enhanced-word { &lt;<span style="color: #440;">word</span>&gt; [\,<span style="color: #449;">|</span>\<span style="color: blue;">.</span><span style="color: #449;">|</span>\:] }
+<span style="color: blue;">token</span> dear {Dear <span class="pl-cce">\h</span><span style="color: blue;">+</span> [S<span style="color: #449;">|</span>s]anta [\,<span style="color: #449;">|</span>\:]<span style="color: blue;">?</span> }
+<span style="color: blue;">token</span> signature {<span class="pl-cce">\h</span><span style="color: blue;">+</span> <span class="pl-cce">\w</span><span style="color: blue;">+</span> <span class="pl-cce">\h</span><span style="color: blue;">*</span> <span class="pl-cce">\w</span><span style="color: blue;">*</span> }</pre></div>
+<p>This <a href="https://docs.perl6.org/syntax/unit" rel="nofollow">unit</a> declares a letter to
+Santa as a salutation, followed by one or more paragraphs, and
+finally, a <code>signature</code>, which should be preceded by an horizontal
+whitespace as indicated by <code>\h</code>.</p>
+<p>Letters such as this one:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>Dear Santa:
+
+This year I have been a really good boy, I have been in all Squashathons.
+
+So I want a plush Camelia studded with diamonds.
+
+ JJ
+</code></pre>
+<p>A simple script will use that grammar and get the signature in a
+single letter:</p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace"><span style="color: blue;">use</span> Santa-Letter;
+
+<span style="color: blue;">sub</span> MAIN ( <span style="color: #449;">Str</span> $file <span style="color: blue;">=</span> <span style="color: #994;"><span style="font-weight: bold;">"</span>letter.txt<span style="font-weight: bold;">"</span></span> ) {
+    <span style="color: blue;">my</span> $letter <span style="color: blue;">=</span>$file<span style="color: blue;">.</span><span style="color: #449;">IO</span><span style="color: blue;">.</span><span style="color: #449;">slurp</span>;
+    <span style="color: blue;">my</span> $<span class="pl-en">parsed</span> <span style="color: blue;">=</span> Santa-Letter<span style="color: blue;">.</span>parse($letter);
+    <span style="color: #449;">say</span> $<span class="pl-en">parsed</span>&lt;<span style="color: #994;">signature</span>&gt;<span style="color: blue;">.</span><span style="color: #449;">trim</span>;
+}</pre></div>
+<p>That was good and well, but Santa needed to get that data into the
+North Pole's CRM together with the letter and index everything up, and
+at the same time he had to deal with suppliers for whom the trade
+wards had brought havoc... So he he called his closest IT elf and ask
+him, in so many words, to do that kind of thing.</p>
+<p>After that speech, the IT elf stood there, his ears aquiver.</p>
+<p>"What?", Santa growled. In a hallowed way, of course.</p>
+<p>The pointed part of the ears reddened and, with the quivering,
+irradiated heat so that a small icicle melted and fell down to the
+earth.</p>
+<p>"You can read the source, right?"</p>
+<p>Rudolf, who had been awakened by the noise of the icicle melting,
+because that was one of his superpowers, intervened</p>
+<h2><a id="user-content-most-people-can-read-source-but-everyone-can-read-the-documentation" class="anchor" aria-hidden="true" href="#most-people-can-read-source-but-everyone-can-read-the-documentation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Most people can read source, but everyone can read the documentation.</h2>
+<p>Said Rudolph.</p>
+<p>"And everyone should write that documentation, too", admonished,
+bobbing his head with the red-tipped nose on the front.</p>
+<p>Santa mumbled, but eventually checked out the master branch of his
+Santa-Letter grammar and set down to work on it. Using, of course, Pod
+6</p>
+<h2><a id="user-content-pod-6-stands-for-plain-old-documentation-for-perl-6" class="anchor" aria-hidden="true" href="#pod-6-stands-for-plain-old-documentation-for-perl-6"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pod 6 stands for "Plain Old documentation for Perl 6"</h2>
+<p>And it (clearly) not an
+acronym. <a href="https://docs.perl6.org/language/pod" rel="nofollow">Pod6</a> is a DSL that helps Perl 6 coders
+write documentation. It's a markup language that uses <code>=</code> to start
+commands and <code>&lt;&gt;</code> for paragraph-level markup. We'll get to that, but
+for the time being, Santa realized that one of the best things was how
+it integrates with Perl 6 itself. So he did a second iteration of his
+examining program thus:</p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace"><span style="color: #999;">#</span>|<span style="color: #999;"> This reads a letter file</span>
+<span style="color: blue;">sub</span> MAIN ( <span style="color: #449;">Str</span> $file <span style="color: blue;">=</span> <span style="color: #994;"><span style="font-weight: bold;">"</span>letter.txt<span style="font-weight: bold;">"</span></span> ) {
+    <span style="color: blue;">my</span> $letter <span style="color: blue;">=</span>$file<span style="color: blue;">.</span><span style="color: #449;">IO</span><span style="color: blue;">.</span><span style="color: #449;">slurp</span>;
+    <span style="color: blue;">my</span> $<span class="pl-en">parsed</span> <span style="color: blue;">=</span> Santa-Letter<span style="color: blue;">.</span>parse($letter);
+    <span style="color: #449;">say</span> $<span class="pl-en">parsed</span>&lt;<span style="color: #994;">signature</span>&gt;<span style="color: blue;">.</span><span style="color: #449;">trim</span>;
+}</pre></div>
+<p>There's a funny sign, <code>|</code>, in that comment. That sign ties it to the
+code behind the comment. And in this case, it's the <code>MAIN</code> sub.</p>
+<p>Santa released to production the program. The IT elf tried to run the
+program,</p>
+<pre style="font-size: 14px; font-family: monospace"><code>./get-signed.p6 --help
+</code></pre>
+<p>and he obtained:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>Usage:
+  ./get-signed.p6 [&lt;file&gt;] -- This reads a letter file
+</code></pre>
+<p>"Some documentation is better than no documentation", he thought. But
+that was not nearly enough. He entered the North Pole ticketing
+system, based entirely in free software, and he requested more
+documentation and assigned the task to Santa. Santa protested loudly,
+but complied.</p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace"><span style="color: #999;">#</span>|<span style="color: #999;">{ This reads a letter file in text format.</span>
+With <span style="color: blue;">no</span> arguments, it <span class="pl-en">will</span> <span style="color: #449;">read</span> the C&lt;<span style="color: #994;">letter.txt</span>&gt; file<span style="color: blue;">.</span>
+}
+<span style="color: blue;">sub</span> MAIN ( <span style="color: #449;">Str</span> $file <span style="color: blue;">=</span> <span style="color: #994;"><span style="font-weight: bold;">"</span>letter.txt<span style="font-weight: bold;">"</span></span> ) {
+    <span style="color: blue;">my</span> $letter <span style="color: blue;">=</span>$file<span style="color: blue;">.</span><span style="color: #449;">IO</span><span style="color: blue;">.</span><span style="color: #449;">slurp</span>;
+    <span style="color: blue;">my</span> $<span class="pl-en">parsed</span> <span style="color: blue;">=</span> Santa-Letter<span style="color: blue;">.</span>parse($letter);
+    <span style="color: #449;">say</span> $<span class="pl-en">parsed</span>&lt;<span style="color: #994;">signature</span>&gt;<span style="color: blue;">.</span><span style="color: #449;">trim</span>;
+    <span style="color: #449;">say</span> $<span style="color: blue;">=</span>pod[<span style="color: #449;">0</span>]<span style="color: blue;">.</span><span style="color: #449;">perl</span>;
+}</pre></div>
+<p>This printed the same message when invoked with <code>--help</code>. And it was
+documentation. When running</p>
+<pre style="font-size: 14px; font-family: monospace"><code>perl6 --doc get-signed.p6
+</code></pre>
+<p>it printed:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>sub MAIN(
+	Str $file = "letter.txt", 
+)
+This reads a letter file in text format. With no arguments, it will read the C&lt;letter.txt&gt; file.
+</code></pre>
+<p>So Perl 6 understands the comment and the code attached to it, and
+automatically pretty-prints both. Documenting a routine  is as easy as
+this.</p>
+<p>Besides, when run on an actual file, the last sentence kicked it, and
+it printed:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>Pod::Block::Declarator.new(WHEREFORE =&gt; sub MAIN (Str $file = "letter.txt") { #`(Sub|81308800) ... }, config =&gt; {}, contents =&gt; [])
+</code></pre>
+<p>Unlike other DSLs used for comments in other languages, such as
+Markdown or Pod itself in Perl 5, Pod 6 not only is a DSL for
+comments, it's part of Perl 6 itself, and thus, it's interpreted by
+the Perl 6 parser, its internal structures available for introspection
+in the <code>$=pod</code> variable. In this case, the comment is a
+<a href="https://docs.perl6.org/type/Pod::Block::Declarator" rel="nofollow"><code>Pod::Block::Declarator</code></a>,
+and that data structure includes the <code>WHEREFORE</code> key which contains
+the declared function and the comment. However, <code>contents</code> and
+<code>config</code> are empty. Which they shouldn't.</p>
+<p>What's more, the little bit of actual formatting used in the comment
+does not work. Not to mention the actual module was not really
+documented. Now it was Santa who was not happy.</p>
+<h2><a id="user-content-adding-documentation-to-a-module" class="anchor" aria-hidden="true" href="#adding-documentation-to-a-module"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Adding documentation to a module.</h2>
+<p>Writing documentation is probably the first thing you should do before
+writing the actual code. Documentation is for the module clients, but
+first and foremost, it's a guide for the author, a roadmap of what the
+module should do and how it should do it. As seen above, documenting
+individual methods or routines is quite easy with Pod 6; however, a
+<em>big picture</em> view of the module is also convenient. And here's the
+Pod for <code>Santa-Letter</code></p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace"><span style="color: blue;">=</span><span style="color: blue;">begin</span> <span class="pl-e">pod</span><span style="color: #999;"></span>
+<span style="color: #999;"></span>
+<span style="color: #999;"><span style="color: blue;">=</span><span class="pl-e">head1</span> <span class="pl-en">NAME</span><span class="pl-en"></span></span>
+<span style="color: #999;"><span class="pl-en"></span></span>
+<span style="color: #999;">Santa-Letter - A grammar for letters to Santa for the <span style="color: #449;">L</span><span class="pl-pse">&lt;</span><span style="color: #449;">Perl 6 Advent Calendar|https://perl6advent.wordpress.com</span><span class="pl-pse">&gt;</span></span>
+<span style="color: #999;"></span>
+<span style="color: #999;"><span style="color: blue;">=</span><span class="pl-e">head1</span> <span class="pl-en">SYNOPSIS</span><span class="pl-en"></span></span>
+<span style="color: #999;"><span class="pl-en"></span></span>
+<span style="color: #999;">Parses letters formatted nicely and written by all good kids in the world.</span>
+<span style="color: #999;"></span>
+<span style="color: #999;"></span><span style="color: blue;">=</span><span style="color: blue;">end</span> <span class="pl-e">pod</span></pre></div>
+<p>Conveniently placed at the end of the file, when invoked with <code>perl6 --doc Santa-Letter.pm6</code>, or simply <code>perl6 --doc Santa-Letter</code> if it
+has been installed, or even <code>p6doc Santa-Letter</code> if the <code>perl6/doc</code>
+is present, will write something like:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>NAME
+
+Santa-Letter - A grammar for letters to Santa for the Perl 6 Advent
+Calendar
+
+SYNOPSIS
+
+Parses letters formatted nicely and written by all good kids in the
+world.
+</code></pre>
+<p>But you will notice here that there was a piece of markup that has
+been eliminated in this type of output. <code>L&lt;&gt;</code> creates links, but it
+obviously does so only if the output format supports that. So let's
+try one of those:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>perl6 --doc=HTML Santa-Letter.pm6
+</code></pre>
+<p>will output a good amount of code, among which this line:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>&lt;p&gt;Santa-Letter - A grammar for letters to Santa for the &lt;a href="https://perl6advent.wordpress.com"&gt;Perl 6 Advent Calendar&lt;/a&gt;&lt;/p&gt;
+</code></pre>
+<p>clearly shows the output of the link.</p>
+<p>As a matter of fact, this command will use the <code>Pod::To::HTML</code> module
+to convert the Pod data structures to HTML. Using any other thing will
+call the corresponding module, and there are <a href="https://modules.perl6.org/search/?q=pod%3A%3Ato" rel="nofollow">many modules available
+on the ecosystem</a>. For
+instance,
+<a href="https://gitlab.com/tyil/perl6-pod-to-pager" rel="nofollow"><code>Pod::To::Pager</code></a> will
+use the system's pager to make stuff a bit more beautiful.</p>
+<pre style="font-size: 14px; font-family: monospace"><code>perl6 --doc=Pager Santa-Letter.pm6 
+</code></pre>
+<p>will result in this</p>
+<p><a target="_blank" rel="noopener noreferrer" href="img/pager.png"><img src="img/pager.png" alt="Output through pager" style="max-width:100%;"></a></p>
+<p>This documentation, besides, follows the convention used in all
+modules. <code>NAME</code> should describe the name and a short oneliner that
+tells what the module is about, while <code>SYNOPSIS</code> includes a longer
+description. While that's good, a real piece of documentation should
+include examples.</p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace"><span style="color: blue;">=</span><span style="color: blue;">begin</span> <span class="pl-e">code</span><span style="color: #999;"></span>
+<span style="color: #999;"></span>
+<span style="color: #999;">use Santa-Letter;</span>
+<span style="color: #999;"></span>
+<span style="color: #999;">say Santa-Letter.parse("Dear Santa\nAll I want for Christmas\nIs you\n Mariah");</span>
+<span style="color: #999;"></span>
+<span style="color: #999;"></span><span style="color: blue;">=</span><span style="color: blue;">end</span> <span class="pl-e">code</span></pre></div>
+<p>Examples are included in <code>code</code> blocks, which from the point of view
+of Pod6,
+are <a href="https://docs.perl6.org/type/Pod::Block::Code" rel="nofollow"><code>Pod::Block::Code</code></a>
+objects. Which is a nice thing, actually. Let's add this little
+snippet of code to our grammar:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>our $pod = $=pod[0];
+</code></pre>
+<p>Grammars are classes, and they have class-scoped variables. We can't
+export the <code>$=pod</code> variable to avoid clashing with others, but we can
+export it and then use it from our program that:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>say $Santa-Letter::pod.perl;
+</code></pre>
+<p>Or, even better,
+install <a href="https://github.com/tony-o/perl6-data-dump"><code>Data::Dump</code></a> and
+write something like this:</p>
+<pre style="font-size: 14px; font-family: monospace"><code>say Dump( $Santa-Letter::pod, :indent(4), :3max-recursion );
+</code></pre>
+<p>which uses the <code>pod</code> class variable we have declared, and prints it
+this way:</p>
+<p><a target="_blank" rel="noopener noreferrer" href="img/structure.png"><img src="img/structure.png" alt="Pod structure: POM" style="max-width:100%;"></a></p>
+<p>This tree, which could be called the POM (Pod Object Model), includes,
+besides the known <code>name</code> and <code>config</code> metadata that goes with every
+block, an array of Pod6 blocks at the same level. Every one has the
+generic attributes plus specific attributes, like <code>level</code> in the case
+of <a href="https://docs.perl6.org/type/Pod::Heading" rel="nofollow">headings</a>. Anyway, the
+interesting thing is that the code itself we are using as an example
+is available as <code>contents</code> of the <code>Pod::Block::Code</code> object.</p>
+<p>"Hum", thought Santa. We could do one better with this. Can we
+actually check that the included code works? Yes we can! Let's expand
+the <code>SYNOPSIS</code> section:</p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace"><span style="color: blue;">=</span><span class="pl-e">head1</span> <span class="pl-en">SYNOPSIS</span><span class="pl-en"></span>
+<span class="pl-en"></span>
+Parses letters formatted nicely <span style="color: blue;">and</span> written <span style="color: #449;">by</span> <span style="color: #449;">all</span> good kids in the world<span style="color: blue;">.</span>
+
+<span style="color: blue;">=</span><span style="color: blue;">begin</span> <span class="pl-e">code</span><span style="color: #999;"></span>
+<span style="color: #999;"></span>
+<span style="color: #999;">use Santa-Letter;</span>
+<span style="color: #999;"></span>
+<span style="color: #999;">say Santa-Letter.parse("Dear Santa\nAll I want for Christmas\nIs you\n Mariah");</span>
+<span style="color: #999;"></span>
+<span style="color: #999;"></span><span style="color: blue;">=</span><span style="color: blue;">end</span> <span class="pl-e">code</span>
+
+You <span style="color: #449;">can</span> also access particular elements in the letter, <span style="color: blue;">as</span> <span style="color: #449;">long</span> <span style="color: blue;">as</span> they are included on the grammar
+
+    <span style="color: blue;">my</span> $letter<span style="color: blue;">=</span><span style="color: #994;"><span style="font-weight: bold;">"</span>Dear Santa,<span class="pl-cce">\n</span>I have not been that good.<span class="pl-cce">\n</span>Just a paper clip will do<span class="pl-cce">\n</span> Donald<span style="font-weight: bold;">"</span></span>
+    <span style="color: #449;">say</span> Santa-Letter<span style="color: blue;">.</span>parse($letter)&lt;<span style="color: #994;">signature</span>&gt;
+
+Also
+
+<span style="color: blue;">=</span><span class="pl-e">for</span> code<span style="color: #999;"> :notest :reason("Variable defined above")</span>
+<span style="color: #999;">say "The letter signed by ", Santa-Letter.parse($letter)&lt;signature&gt;,</span>
+<span style="color: #999;">    " has ", Santa-Letter.parse($letter)&lt;paragraph&gt;.elems, " paragraphs";</span>
+<span style="color: #999;"></span>    
+<span style="color: blue;">=</span><span class="pl-e">end</span> <span class="pl-en">pod</span><span style="color: #999;"></span></pre></div>
+<p>Code can be represented in different ways in a Pod. The first is
+known; the second uses simply indentation, <em>à la</em> Markdown, to denote
+the same thing. We can also
+use <a href="https://docs.perl6.org/language/pod#Paragraph_blocks" rel="nofollow"><code>=for</code></a>
+paragraph blocks, which is declared in this case with the <code>code</code> type
+and will continue until the next blank line. It's an abbreviated way
+that does not need the <code>=end</code> directive. But there's something more
+there: the configuration variables <code>:notest :reason("Variable defined above")</code>. These configuration variables are arbitrary, and we can add
+as many as we want. They will go to the <code>config</code> attribute of the
+block, and we can work with them. That's exactly what we will do in
+this script that will process the code examples:</p>
+<div class="highlight highlight-source-perl6fe"><pre style="font-size: 14px; font-family: monospace"><span style="color: blue;">for</span> $Santa-Letter::pod<span style="color: blue;">.</span>contents <span style="color: blue;">-&gt;</span> $block {
+    <span style="color: blue;">next</span> <span style="color: blue;">if</span> $block <span style="color: blue;">!</span><span style="color: blue;">~~</span> <span style="color: #449;">Pod</span>::Block::Code;
+    <span style="color: blue;">if</span> $block<span style="color: blue;">.</span>config&lt;<span style="color: #994;">notest</span>&gt; {
+        <span style="color: #449;">say</span> <span style="color: #994;"><span style="font-weight: bold;">"</span>→ Block<span class="pl-cce">\n\t</span><span style="font-weight: bold;">"</span></span><span style="color: blue;">~</span> $block<span style="color: blue;">.</span>contents
+            <span style="color: blue;">~</span> <span style="color: #994;"><span style="font-weight: bold;">"</span><span class="pl-cce">\n\t</span>❈ Not tested since \'<span style="font-weight: bold;">"</span></span> <span style="color: blue;">~</span> $block<span style="color: blue;">.</span>config&lt;<span style="color: #994;">reason</span>&gt; <span style="color: blue;">~</span> <span style="color: #994;"><span style="font-weight: bold;">"</span>\'<span style="font-weight: bold;">"</span></span>;
+    } <span style="color: blue;">else</span> {
+        <span style="color: blue;">my</span> $code <span style="color: blue;">=</span> $block<span style="color: blue;">.</span>contents<span style="color: blue;">.</span><span style="color: #449;">join</span>(<span style="color: #994;"><span style="font-weight: bold;">"</span><span style="font-weight: bold;">"</span></span>);
+        <span style="color: #449;">say</span> <span style="color: #994;"><span style="font-weight: bold;">"</span>→ Block<span class="pl-cce">\n\t</span><span style="font-weight: bold;">"</span></span><span style="color: blue;">~</span> $block<span style="color: blue;">.</span>contents;
+        <span style="color: blue;">try</span> {
+            <span style="color: #449;">EVAL</span> $code;
+        }
+        <span style="color: blue;">if</span> ( <span style="color: blue;">$!</span> ) {
+            <span style="color: #449;">say</span> <span style="color: #994;"><span style="font-weight: bold;">"</span><span class="pl-cce">\n\t</span>✘ Produces error <span class="pl-cce">\"</span>$!<span class="pl-cce">\"</span><span style="font-weight: bold;">"</span></span>, <span style="color: #994;"><span style="font-weight: bold;">"</span><span class="pl-cce">\n</span><span style="font-weight: bold;">"</span></span> <span style="color: blue;">xx</span> <span style="color: #449;">2</span>;
+        } <span style="color: blue;">else</span> {
+            <span style="color: #449;">say</span> <span style="color: #994;"><span style="font-weight: bold;">"</span>✔ is OK<span class="pl-cce">\n</span><span style="font-weight: bold;">"</span></span>;
+        }
+    }
+}</pre></div>
+<p>As we have seen in the structure above, the <code>contents</code> attribute will
+include an array of first-level Pod blocks, which in our case include
+all the three blocks we want to evaluate (or maybe not). Non-code
+blocks are skipped (but could be checked for spelling, too). We do two
+interesting things here: we check for the <code>notest</code> flag in the
+configuration via <code>$block.config&lt;notest&gt;</code>, and we print some note if
+that's the case, but if it should be tested, then it's <code>EVAL</code>ed (we
+need the <code>use MONKEY-SEE-NO-EVAL</code> pragma for that.</p>
+<p>Santa runs that on the documentation, and lo and behold!</p>
+<pre style="font-size: 14px; font-family: monospace"><code>→ Block
+	my $letter="Dear Santa,\nI have not been that good.\nJust a paper clip will do\n Donald"
+say Santa-Letter.parse($letter)&lt;signature&gt;
+
+	✘ Produces error "Two terms in a row across lines (missing semicolon or comma?)"(
+ 
+)
+</code></pre>
+<p>He was at once happy and humbled. A simple semicolon was spoiling the
+quality of the examples. It's always the semicolon. He put the
+semicolon back in the examples, and the module documentation passed
+the test with flying colors.</p>
+<h2><a id="user-content-back-to-production" class="anchor" aria-hidden="true" href="#back-to-production"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Back to production</h2>
+<p>Provided with
+this
+<a href="https://github.com/JJ/my-perl6-examples/blob/master/grammars/Santa-Letter.pm6">documented module</a>,
+the IT elf was moderately happy and his ears stopped quivering and
+reddening. He could also use documentation for every
+one of the tokens, but enough was enough and at least he had some
+examples to get the application going.
+Rudolf was soundly asleep, and now he would have to write
+the bridge between the letter-receiving microservice and the customer
+relationship macroservice.
+He would probably
+use <a href="https://cro.services/" rel="nofollow">Cro</a> for that, but that's a topic for
+another day.</p>
