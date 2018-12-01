@@ -5,6 +5,9 @@ use v6;
 use lib <../grammars>;
 
 use Santa-Letter;
+use Data::Dump;
 
-dd $Santa-Letter::pod.perl;
 say Santa-Letter.parse("Dear Santa\nAll I want for Christmas\nIs you\n Mariah");
+my $letter="Dear Santa,\nI have not been that good.\nJust a paper clip will do\n Donald";
+say "The letter signed by ", Santa-Letter.parse($letter)<signature>,
+    " has ", Santa-Letter.parse($letter)<paragraph>.elems, " paragraphs";

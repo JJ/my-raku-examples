@@ -8,5 +8,5 @@ use lib <../grammars>;
 
 use Santa-Letter;
 
-say Dump( $Santa-Letter::pod, :indent(4), :3max-recursion );
+say Dump( $Santa-Letter::pod, :indent(4) );
 
