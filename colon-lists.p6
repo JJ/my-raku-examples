@@ -2,4 +2,4 @@
 
 use v6;
 
-say (:a:b:c);
+say (:a:b);
