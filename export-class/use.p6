@@ -2,6 +2,6 @@
 
 use MyModule;
 
-my $class = MyModule::Class.new();
+my $class = Class.new();
 say $class.perl;
 

@@ -1,3 +1,3 @@
 unit module MyModule;
 
-class Class  {};
+class Class is export  {};
