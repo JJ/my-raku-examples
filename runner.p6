@@ -2,7 +2,11 @@
 
 use v6;
 
-require "./runnable.p6";
+use Pod::Load;
 
-=output
-Loaded
+for <runnable other> -> $f {
+#    require "./$f.p6";
+    my $pod = load( "$f.p6" );
+    dd $pod;
+}
+
