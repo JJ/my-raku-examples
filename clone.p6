@@ -6,7 +6,12 @@ class Bar {
     has $.quux = 3;
     has @.foo = <a b>;
     has %.bar = <a b c d>;
-    method clone { nextwith :foo(@!foo.clone), :bar(%!bar.clone), |%_  }
+    method clone {
+        my $clone = self.Mu::clone;
+        $clone.foo = @!foo;
+        $clone.bar = %!bar;
+        $clone;
+    }
 }
 
 my $o1 = Bar.new( :42quux );
