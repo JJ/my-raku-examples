@@ -17,5 +17,5 @@ class Hero { #taken from https://medium.freecodecamp.org/a-short-overview-of-obj
 }
 
 my $hero = Hero.new(:name('Þor'),
-                    :inventory(['Mjölnir','Chariot','Bilskirnir','Donareiche']));
+                    :inventory(['Mjölnir','Chariot','Bilskirnir']));
 say $hero.act;
