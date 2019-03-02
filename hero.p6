@@ -11,11 +11,11 @@ class Hero { #taken from https://medium.freecodecamp.org/a-short-overview-of-obj
         @!inventory = @inventory
     }
     
-    method act {
-        return @!inventory.pick;
-    }
 }
 
-my $hero = Hero.new(:name('Þor'),
-                    :inventory(['Mjölnir','Chariot','Bilskirnir']));
-say $hero.act;
+sub new-main($name, *@stuff ) {
+    Hero.new(:name($name), :inventory(@stuff) ).perl.say
+}
+
+RUN-MAIN( &new-main, Nil );
+
