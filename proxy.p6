@@ -1,6 +1,6 @@
 #!/usr/bin/env perl6
 
-use v6;
+use v6.d;
 
 sub double() is rw {
     my $storage = 0;
