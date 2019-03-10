@@ -4,7 +4,6 @@ use v6;
 
 class IO::Store is IO::Handle {
     has @.lines = [];
-    has $.cursor = 0;
 
     submethod TWEAK {
         self.encoding: 'utf8'; # set up encoder/decoder 
@@ -25,18 +24,12 @@ class IO::Store is IO::Handle {
     
     method READ(IO::Handle:D: Int:D \bytes --> Buf:D) {
         my Buf $everything := self.whole();
-        my $result = $everything.splice( $!cursor, bytes );
-        $!cursor = $!cursor + bytes;
-        return $result;
+        return $everything;
     }
 
     method EOF {
         my $everything = self.whole();
-        if $!cursor < $everything.elems {
-            return False;
-        } else {
-            return True;
-        }
+        !$everything;
     }
 
     method gist() {
