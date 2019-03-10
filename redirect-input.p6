@@ -15,8 +15,8 @@ class IO::Store is IO::Handle {
         True;
     }
 
-    method !join() {
-        my Buf $everything;
+    method whole() {
+        my Buf $everything = Buf.new();
         for @!lines -> $b {
             $everything ~= $b;
         }
@@ -24,24 +24,20 @@ class IO::Store is IO::Handle {
     }
     
     method READ(IO::Handle:D: Int:D \bytes --> Buf:D) {
-        my Buf $everything = self.join();
-        if $!cursor + bytes < $everything.size {
-            my $result = $everything.splice( $!cursor, bytes );
-            $!cursor = $!cursor + bytes;
-            return $result;
-        } 
-            
+        my Buf $everything := self.whole();
+        my $result = $everything.splice( $!cursor, bytes );
+        $!cursor = $!cursor + bytes;
+        return $result;
     }
 
     method EOF {
-        my $everything = self.join();
-        if $!cursor < $everything.size {
+        my $everything = self.whole();
+        if $!cursor < $everything.elems {
             return False;
         } else {
             return True;
         }
     }
-        
 
     method gist() {
         return @!lines.map( *.decode ).join("\n" );
@@ -56,5 +52,5 @@ say $store;
 
 say "Reading";
 
-
-.decode.say for $store.lines();
+say $store.read(3).decode;
+say $store.read(3).decode;
