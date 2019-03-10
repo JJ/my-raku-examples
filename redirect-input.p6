@@ -26,8 +26,9 @@ class IO::Store is IO::Handle {
     method READ(IO::Handle:D: Int:D \bytes --> Buf:D) {
         my Buf $everything = self.join();
         if $!cursor + bytes < $everything.size {
-            return $everything.splice( $!cursor, bytes );
+            my $result = $everything.splice( $!cursor, bytes );
             $!cursor = $!cursor + bytes;
+            return $result;
         } 
             
     }
@@ -56,4 +57,4 @@ say $store;
 say "Reading";
 
 
-say $store.lines();
+.decode.say for $store.lines();
