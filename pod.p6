@@ -8,7 +8,7 @@ my $link="See L<https://modules.perl6.org/> .";
 my $pod=qq:to/END/;
 =pod
 $link
-=pod		    
+=pod
 }
 END
 say $pod;

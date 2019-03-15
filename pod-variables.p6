@@ -2,13 +2,17 @@
 
 use v6;
 
-use Pod::To::HTML;
-
  
 say $=finish.perl;
 
-=begin finish
+=finish
+
+This is a pod
+
+=begin code
 
 This is the real end
 
-=end finish
+=end code
+
+
