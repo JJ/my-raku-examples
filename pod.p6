@@ -10,8 +10,18 @@ my $pod=qq:to/END/;
 $link
 =pod
 }
+=puf
+Well
+=pad
+Pad
+=ped
+Ped
+=pid
+Pid
 END
 say $pod;
 
-use MONKEY-SEE-NO-EVAL;   
-say pod2html(EVAL($pod ~ "\n\$=pod"));
+use MONKEY-SEE-NO-EVAL;
+my @e-pod = EVAL($pod ~ "\n\$=pod");
+say @e-pod.perl;
+
