@@ -10,3 +10,7 @@ say þor, Þor;
 sub term:<✔> { True }
 
 say ✔;
+
+sub dice {(1...6).pick }
+
+say dice + dice;
