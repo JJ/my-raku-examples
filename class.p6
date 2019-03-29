@@ -7,3 +7,7 @@ class a-class {
 }
 
 say (a-class.new.an-attribute = "hey");
+my a-class $an-object .= new;
+
+$an-object.an-attribute = "hey now";
+say $an-object.an-attribute();
