@@ -2,6 +2,6 @@
 
 use v6;
 
-require "foo.pm6";
+require ::"foo";
 
 say bar;
