@@ -2,6 +2,10 @@
 
 use v6;
 
-require ::"foo";
+use lib <.>;
+
+require foo <&bar>;
+
+say "In requirer";
 
 say bar;

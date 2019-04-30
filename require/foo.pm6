@@ -1,2 +1,4 @@
-sub bar { "quux" }
 say "Loaded";
+
+sub bar { "quux" };
+
