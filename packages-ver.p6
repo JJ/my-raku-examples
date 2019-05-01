@@ -7,3 +7,4 @@ package Foo:ver<1> {};
 module Foo {};
 
 say Foo.^ver;
+say Foo.^name;
