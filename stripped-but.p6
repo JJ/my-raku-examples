@@ -2,8 +2,8 @@
 
 use v6;
 
-sub zipi( --> Str ) { return "Zape" but 42 };
+sub zipi( --> Array ) { return [1,2] but 42 };
 
-my $zope = zipi;
+my @zope := zipi;
 
-say $zope.^name;
+say @zope.^name;
