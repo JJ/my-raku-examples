@@ -4,4 +4,6 @@ use v6;
 
 sub zipi( --> Str ) { return "Zape" but 42 };
 
-say zipi.Int;
+my $zope = zipi;
+
+say $zope.^name;
