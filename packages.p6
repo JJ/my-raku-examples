@@ -3,7 +3,7 @@
 use v6;
 
 class Foo {
-    sub zape () { say "zipi" }
+    our sub zape () { say "zipi" }
     class Bar {
         method baz () { return 'Þor is mighty' }
         our &zape = { "zipi" };
@@ -11,6 +11,7 @@ class Foo {
     }
 }
 
+say Foo::zape;
 say Foo::Bar.baz;
 say Foo::Bar::zape;
 my $bar = 'Bar';
