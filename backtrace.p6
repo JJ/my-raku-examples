@@ -6,7 +6,7 @@ try {
     $þor();
 }
 if ($!) {
-    say $!.backtrace; # OUTPUT: «Something bad happened.␤»
+    print $!.backtrace; # OUTPUT: «Something bad happened.␤»
 }
 
 try {
