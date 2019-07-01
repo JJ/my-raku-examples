@@ -17,6 +17,3 @@ my $quoted = "_enhanced_";
 my $parsed = Pair-Quoted.parse($quoted);
 say $parsed;
 
-import Pair-Quoted 'letters';
-
-say "what_ever" ~~ /<letters>/;
