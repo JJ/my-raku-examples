@@ -10,10 +10,17 @@ my grammar Pair-Quoted {
     token quoted:sym<code> { '`' ~ '`' <letters> }
     token quoted:sym<strong> { '**' ~ '**' <letters> }
     token quoted:sym<u> { '_' ~ '_' <letters> }
-    token letters { <[\w] - [_]>+ }
+    token letters is export { <[\w] - [_]>+ }
 }
 
 my $quoted = "_enhanced_";
 my $parsed = Pair-Quoted.parse($quoted);
 say $parsed;
+
+say Pair-Quoted::EXPORT::ALL::.keys;
+
+import Pair-Quoted;
+
+say "abc" ~~ &letters;
+
 
