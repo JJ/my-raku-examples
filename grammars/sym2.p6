@@ -8,5 +8,5 @@ grammar Foo {
     proto token action {*}
     token action:sym<come> { <sym> }
     token action:sym<bebe> { <sym> }
-    token action:sym<*> { . }
+    token action:sym<default> { \w+ }
 }.parse("come bebe ama").say;
