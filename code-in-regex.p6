@@ -2,4 +2,4 @@
 
 use v6;
 
-"zipi zape" ~~ /\w+ { say $/ } /;
+"zipi zape" ~~ m:g/(\w+) { say $/[0] } /;
