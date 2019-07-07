@@ -2,5 +2,5 @@
 
 use v6;
 
-say "zipi zape" ~~ /(\w){ }\w» \s+ \w+({$/})/;
+say "zipi zape" ~~ /$<my-letter> = (\w)\w» \s+ \w+({$<my-letter>})/;
 
