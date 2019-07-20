@@ -6,7 +6,7 @@ role InnieMinnieMoe does Iterable {
     has @.IMM = <Innie Minnie Moe>;
 
     method iterator() {
-        return @.IMM;
+        return @!IMM;
     }
 
 }
