@@ -13,3 +13,4 @@ role InnieMinnieMoe does Iterable {
 
 my @whatever does InnieMinnieMoe = "";
 .say for @whatever;
+
