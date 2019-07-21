@@ -4,12 +4,8 @@ use v6;
 
 my $zipi;
 
-class Zape {
-    method Int { 44 }
-};
-
-sub f(--> Int ) {
-    $zipi = "{Zape.new}";
+sub f(--> 33 ) {
+    $zipi = <a b c>.map: {44}
 };
 
 say f;
