@@ -2,13 +2,13 @@
 
 use v6;
 
-my $i = 0; 
-my $supply1 = supply { loop { await Promise.in(3); done if $i++> 5; emit("B"); } };
-my $supply2 = supply { loop { await Promise.in(1); done if $i++> 5; emit("A"); } };
+my $i = 0;
+my Channel $c .= new;
+my $supply1 = start { for ^5 { await Promise.in(1); $c.send("B"); } };
+my $supply2 = start { for ^5 { await Promise.in(0.5); $c.send("A"); } };
 
-react 
-{ 
-    #whenever Supply.merge($supply1, $supply2) -> $x { $x.print }
-    whenever $supply1 -> $x { $x.print };
-    whenever $supply2 -> $x { $x.print };
-}
+await $supply2;
+await $supply1;
+$c.close;
+
+.say for $c.list;
