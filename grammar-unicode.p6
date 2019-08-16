@@ -1,6 +1,14 @@
 #!/usr/bin/env perl6
 
-for <y ✓ Ⅲ> {
-    say $_.uniprops;
-    say m/<|w>/;
+grammar G {
+
+
+  proto rule TOP { * }
+
+  rule TOP:sym<y>  { «<.sym>» }
+  rule TOP:sym<ら>  { «<.sym>» }
+
 }
+
+say G.parse('y'); # ｢y｣
+say G.parse('ら'); 
