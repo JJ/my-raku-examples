@@ -2,7 +2,7 @@ BEGIN {
     class Versioned { }
     Versioned.^set_ver:  '0,0,1';
     Versioned.^set_auth: 'github:Kaiepi';
-    Versioned.^set_api:  IntStr.new: 0, '0';
+    Versioned.^set_api:  <0>;
 }
 say Versioned.^ver;  # OUTPUT: «0.0.1␤»
 say Versioned.^auth: # OUTPUT: «github:Kaiepi␤»
