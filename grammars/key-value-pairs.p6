@@ -33,13 +33,13 @@ class KeyValuePairsActions {
 
 
 my $actions = KeyValuePairsActions;
-my $res = KeyValuePairs.parse(q:to/EOI/, :$actions).made;
+my @res = KeyValuePairs.parse(q:to/EOI/, :$actions).made;
 second=b
 hits=42
 perl=6
 EOI
 
-for @$res -> $p {
+for @res -> $p {
     say "Key: $p.key()\tValue: $p.value()";
 }
 
