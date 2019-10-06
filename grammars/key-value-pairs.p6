@@ -39,9 +39,7 @@ hits=42
 perl=6
 EOI
 
-say $res;
 for @$res -> $p {
-    say $p;
     say "Key: $p.key()\tValue: $p.value()";
 }
 
