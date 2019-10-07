@@ -16,7 +16,6 @@ grammar KeyValuePairs {
 
 class KeyValuePairsActions {
     method pair      ($/) {
-        say $/;
         $/.make: $<key>.made => $<value>.made
     }
     method identifier($/) {
@@ -25,7 +24,6 @@ class KeyValuePairsActions {
     }
 
     method TOP ($match) {
-        say $match;
         # can use any variable name for parameter, not just $/
         $match.make: $match<pair>».made
     }

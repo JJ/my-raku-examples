@@ -3,18 +3,21 @@
 use v6;
 
 use ConfigurationSets;
+use ConfigurationSetsActions;
 
-
-say ConfigurationSets.parse(q:to/EOI/);
+my $actions = ConfigurationSetsActions;
+my $sets = ConfigurationSets.parse(q:to/EOI/, :$actions);
 second=b # Just a thing
 hits=42
 perl=6
 
-third=c
+third=c # New one
 hits=33
 EOI
 
-
+for @$sets -> $set {
+    say "Element→ $set";
+}
 
 
 
