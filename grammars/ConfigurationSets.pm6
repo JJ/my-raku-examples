@@ -3,6 +3,14 @@ use Grammar::Tracer;
 
 unit grammar ConfigurationSets is KeyValuePairs;
 
+token TOP {
+    <configuration-element>+ %% \v
+}
+
+token configuration-element {
+    <pair>+ %% \v
+}
+
 token comment {
     \s* '#' .+? $$
 }
