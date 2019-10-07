@@ -2,17 +2,13 @@ use Grammar::Tracer;
 
 grammar KeyValuePairs {
     token TOP {
-        [<pair> \v+]*
+        <pair>+ %% \v
     }
     
     token pair {
         <key=.identifier> '=' <value=.identifier>
     }
-    
-    # token ws {
-    #     \h*
-    # }
-    
+
     token identifier {
         \w+
     }

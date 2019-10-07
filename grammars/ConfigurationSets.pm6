@@ -4,9 +4,9 @@ use Grammar::Tracer;
 unit grammar ConfigurationSets is KeyValuePairs;
 
 token comment {
-    \h+ '#' .+ \n
+    \s* '#' .+? $$
 }
 
-rule pair {
-    <key=.identifier> '=' <value=.identifier> <comment>
+token pair {
+    <key=.identifier> '=' <value=.identifier> <comment>?
 }
