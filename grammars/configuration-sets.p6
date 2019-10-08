@@ -6,7 +6,7 @@ use ConfigurationSets;
 use ConfigurationSetsActions;
 
 my $actions = ConfigurationSetsActions;
-my $sets = ConfigurationSets.parse(q:to/EOI/, :$actions);
+my $sets = ConfigurationSets.parse(q:to/EOI/, :$actions).made;
 second=b # Just a thing
 hits=42
 perl=6

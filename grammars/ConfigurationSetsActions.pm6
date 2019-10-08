@@ -8,7 +8,6 @@ method configuration-element($match) {
 
 method TOP ($match) {
     my @made-elements = gather for $match<configuration-element> {
-        say $_;
         take $_.made
     };
     $match.make( @made-elements );
