@@ -2,8 +2,11 @@
 
 use v6;
 
-sub bar () { return "baþ" };
+class Baz {
+    method bar () { return "baþ" };
+}
 
-my $wrapped = &bar.wrap( { " → " ~ callsame() ~ " ← " } );
+my &method_bar = Baz.^find_method("bar");
+my $wrapped = &method_bar.wrap( { " → " ~ callsame() ~ " ← " } );
 
-say bar();
+say Baz.bar();
