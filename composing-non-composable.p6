@@ -2,6 +2,9 @@
 
 enum Norse-gods <Þor Oðinn Freija>;
 
-class Norse-enum does Norse-gods {}
+say "Composalizable ", Norse-gods.HOW.archetypes.composalizable();
 
-say Norse-enum.new.raku;
+enum All-gods does Norse-gods <Ammon>;
+
+say All-gods::<Oðinn>;
+
