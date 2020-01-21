@@ -1,7 +1,9 @@
 #!/usr/bin/env raku
 
+use nqp;
+
 class Person { ; }
-class Woman is Person { ; }
+class Woman is mixin is Person { ; }
 my $tom = Person.new;
 my $lisa = Woman.new;
 
