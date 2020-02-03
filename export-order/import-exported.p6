@@ -2,5 +2,6 @@
 
 use Exporter;
 
-say $exported;
+say Exporter::<$exported>;
+say Exporter::foo;
 
