@@ -4,4 +4,7 @@ unit module Exporter;
 
 our $exported  is export  = 'Þor';
 
-our sub foo { 'bar' };
+my $bar is export;
+
+sub foo  is export { 'bar' };
+# What is exactly a routine default scope? 

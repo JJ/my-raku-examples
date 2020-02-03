@@ -3,5 +3,5 @@
 use Exporter;
 
 say Exporter::<$exported>;
-say Exporter::foo;
+say foo;
 
