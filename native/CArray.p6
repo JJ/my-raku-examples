@@ -15,5 +15,5 @@ for $native-array.list -> $elem {
 # get every element by its index-based position 
 for 0..$native-array.elems - 1 -> $position {
     say "Element at position $position is "
-          ~ $native-array.AT-POS( $position );
+          ~ $native-array[ $position ];
 }
