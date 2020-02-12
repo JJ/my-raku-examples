@@ -7,5 +7,8 @@ class Sunk {
     }
 }
 
-^3 .map: { Sunk.new( :titanic($_) ) };
+for 1 {
+    say "About to sink";
+    Sunk.new( :titanic($_) );
+}
 
