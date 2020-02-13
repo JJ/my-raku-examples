@@ -1,11 +1,6 @@
 #!/usr/bin/env raku
 
-class Sunk {
-    has $.titanic;
-    method sink {
-        say "Sinking $!titanic";
-    }
+say gather for 1 {
+    ^3 .map: *.take;
 }
-
-^3 .map: { Sunk.new( :titanic($_) ) };
 
