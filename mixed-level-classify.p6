@@ -1,9 +1,7 @@
 #!/usr/bin/env raku
 
 
-
-say % .classify-list: {
-    [ Date.new($_~"-01-01").is-leap-year ,
-      $_ mod 3  ]
-    }, 1965..2021;
+my @mapper = [['1a','1b','1c'],['2a','2b','2c'],['3a','3b','3c']];
+say @mapper;
+say % .classify-list: @mapper, 1,2,1,1,2,0;
 
