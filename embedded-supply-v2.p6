@@ -6,8 +6,8 @@ use v6;
 my $supply = IO::Notification.watch-path( "/var/log/syslog" );
 
 my $parsed = supply {
-    $supply.tap: -> $v {
-        emit( { Seen => $v.event }  );
+    whenever $supply {
+        emit( { Seen => $_.event }  );
         CATCH {
             default {
                 $*ERR.say: .message;
