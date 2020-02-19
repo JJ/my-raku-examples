@@ -9,7 +9,16 @@ my $supply = supply {
     done;
 }
 my $second-supply = supply {
-    $supply.tap( -> $v { emit( { Seen => $v }  ) }  );
+    $supply.tap( -> $v {
+                     if 1 {
+                         with True {
+                             for 1 {
+                                 emit( { Seen => $v }  )
+                             }
+                         }
+                     }
+                 }
+               );
 }
 
 $second-supply.tap( -> $v { say "Second : $v" }, done => { say "No more" });
