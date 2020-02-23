@@ -1,14 +1,8 @@
 #!/usr/bin/env raku
 
 class Foo {}
-my Hash[Foo, Foo] $MAP;
+my %map = Hash[Foo, Foo].new ;
 
-say $MAP.DEFINITE;
-my $map = $MAP.new;
-say $map.DEFINITE;
+%map{Foo.new} = Foo.new;
 
-my $f1 = Foo.new;
-my $f2 = Foo.new;
-
-$map{$f1} = $f2;
-say $map;
+%map.say;
