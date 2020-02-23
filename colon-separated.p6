@@ -2,8 +2,12 @@
 
 class Foo {
     has $.bar = "Foo";
-    method whoami($me:) {
-        "Well I'm class " ~ $!bar ~ ", of course!"
+    multi method whoami($ where /^^<[A..Z]>/:) {
+        "Hello big " ~ $!bar 
+    }
+    multi method whoami($ where /^^<[a..z]>/:) {
+        "Hello little " ~ $!bar
     }
 }
-say Foo.new( :bar("Bar") ).whoami; # OUTPUT: «Well I'm class Foo, of course!␤»
+say Foo.new( :bar("Bar") ).whoami; # OUTPUT: «Hello big Bar␤»
+say Foo.new( :bar("bar") ).whoami; # OUTPUT: «Hello little bar␤»
