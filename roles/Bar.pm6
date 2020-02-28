@@ -1,3 +1,4 @@
+#| WHY for Bar
 unit module Bar;
 
 use Foo; 
