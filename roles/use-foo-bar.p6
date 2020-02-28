@@ -2,11 +2,9 @@
 
 use v6;
 
-use Foo;
-use Bar;
 
-say Bar.WHY;
+use Baz;
 
-sub f(bar \k) { }
+say Baz.WHY;
 
-f(bar.new);
+
