@@ -19,7 +19,7 @@ multi my-multi-func (Str $s) { say "You provided a string $s"; };
 
 #`[
 And this is how a multi would work.
-You can still access every documentation. Somehos
+You can still access every documentation. Somehow
 ]
 
 say "my-multi-func is a {&my-multi-func.perl} and does {&my-multi-func.WHY}";
