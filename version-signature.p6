@@ -6,18 +6,18 @@ role Versioned {
     }
 }
 
-my constant one = my class WithApi:ver<0.0.1>:auth<github:JJ>:api<1> does Versioned {}
-my constant two = my class WithApi:ver<0.0.1>:auth<github:JJ>:api<2> does Versioned {}
+class WithApi:ver<0.0.1>:auth<github:JJ>:api<1> does Versioned {}
+# my constant two = my class WithApi:ver<0.0.1>:auth<github:JJ>:api<2> does Versioned {}
 
-multi sub get-api( one $foo ) {
+multi sub get-api( WithApi $foo where .^api() == 1 ) {
     return "That's version 1";
 }
 
-multi sub get-api( two $foo ) {
+multi sub get-api( WithApi $foo ) {
     return "That's version deuce";
 }
 
 
 
-say get-api(one.new);
-say get-api(two.new);
+say get-api(WithApi.new);
+# say get-api(two.new);
