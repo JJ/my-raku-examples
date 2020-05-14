@@ -1,0 +1,32 @@
+{
+  "source-url": "Write me!",
+  "provides": {
+    "Routes.pm6": "lib/Routes.pm6"
+  },
+  "license": "Write me!",
+  "description": "Write me!",
+  "tags": [
+    ""
+  ],
+  "depends": [
+    "Cro::HTTP",
+    "Cro::WebSocket"
+  ],
+  "support": {
+    "source": "Write me!"
+  },
+  "perl": "6.*",
+  "auth": "Write me!",
+  "version": "0.0.1",
+  "authors": [
+    ""
+  ],
+  "resources": [
+  ],
+  "test-depends": [
+  ],
+  "meta-version": "0",
+  "build-depends": [
+  ],
+  "name": "calories"
+}
