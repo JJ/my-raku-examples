@@ -1,12 +1,11 @@
 #!/usr/bin/env raku
 
-class X::Here is Exception{}
+class X::Here is Exception {}
 
-my $valur = 3;
 sub foo {
     X::Here.new.throw;
 }
-foo;
+my $valur = foo;
 
 CATCH {
     # will definitely catch all the exception 
