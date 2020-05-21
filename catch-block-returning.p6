@@ -11,6 +11,6 @@ sub foo {
 my $valur = foo;
 say "This won't be said, but $valur";
 
-CATCH { default { $valur = foo } }
+CATCH { default { $valur = foo; .resume } }
  
 
