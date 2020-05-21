@@ -1,8 +1,13 @@
 #!/usr/bin/env raku
 
+class X::Here is Exception{}
+
 my $valur = 3;
-die [999, "Pop pop"];
- 
+sub foo {
+    X::Here.new.throw;
+}
+foo;
+
 CATCH {
     # will definitely catch all the exception 
     default { .Str.say; $valur = 42 }
