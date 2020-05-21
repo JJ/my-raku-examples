@@ -3,11 +3,14 @@
 class X::Here is Exception { method message() { "Pop Pop" } }
 
 sub foo {
-    X::Here.new.throw;
+    state $bar = X::Here.new.throw;
+    say "Foo";
+    $bar = 33;
+    return $bar;
 }
 my $valur = foo;
 say "This won't be said, but $valur";
 
-CATCH { default { $valur = 42 } }
+CATCH { default { $valur = foo } }
  
 
