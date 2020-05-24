@@ -9,4 +9,4 @@ BEGIN {
 %*ENV<AAA> = 3;
 require "./say-env.p6" @vars;
 say "Collated args → ", $collated-args;
-
+require "./say-env.p6";
