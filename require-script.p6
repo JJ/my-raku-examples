@@ -1,9 +1,12 @@
 #!/usr/bin/env raku
 
-use lib <.>;
-
-require "./say-env.p6";
-
-{
-    require "./sub-main.p6";
+my @vars;
+BEGIN {
+     @vars = ['$collated-args'];
 }
+
+@*ARGS.append: "Another arg";
+%*ENV<AAA> = 3;
+require "./say-env.p6" @vars;
+say "Collated args → ", $collated-args;
+
