@@ -1,5 +1,7 @@
 #!/usr/bin/env raku
 
-say "Args → ", @*ARGS;
-our $collated-args is export = @*ARGS.join;
-say "Env ⇒", %*ENV;
+sub MAIN( $foo ) {
+    say "Args → ", @*ARGS;
+    our $collated-args is export = @*ARGS.join;
+    say "Env ⇒", %*ENV;
+}
