@@ -1,3 +1,4 @@
 #!/usr/bin/env raku
 
-our $foo = 7;
+our $foo = @*ARGS.join: ".";
+say "required ", @*ARGS;

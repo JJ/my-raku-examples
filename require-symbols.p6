@@ -1,6 +1,10 @@
 #!/usr/bin/env raku
 
-my $name = '$foo';
-require Foo:file("foo.p6");
-say Foo::{$name};
+
+@*ARGS.append("bar");
+my $handle=CompUnit::Loader.load-source-file("foo.p6".IO);
+say $handle.globalish-package<$foo>;
+@*ARGS.append("baz");
+$handle=CompUnit::Loader.load-source-file("foo.p6".IO);
+say $handle.globalish-package<$foo>;
 
