@@ -1,3 +1,3 @@
 #!/usr/bin/env raku
 
-say "Hey";
+our $foo = 7;
