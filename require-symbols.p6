@@ -1,4 +1,8 @@
 #!/usr/bin/env raku
 
-require "foo.p6" <$bar>;
+my @imported;
+BEGIN {
+    @imported = ['$bar'];
+}
+require "foo.p6" @imported;
 say $bar;
