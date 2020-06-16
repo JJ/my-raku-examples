@@ -10,7 +10,7 @@ role Custom-Repo {
      {
 	 say $spec;
 	 %!distros{$spec}++;
-	 self.next-repo.need( $spec, $precomp, :@precomp-stores);
+	 return self.next-repo.need($spec, $precomp) if self.next-repo;
      }
 }
 
