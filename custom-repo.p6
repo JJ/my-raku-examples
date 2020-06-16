@@ -3,8 +3,7 @@
 role Custom-Repo {
     has %.distros;
     method need(CompUnit::DependencySpecification $spec,
-                CompUnit::PrecompilationRepository $precomp,
-                CompUnit::PrecompilationStore :@precomp-stores
+                CompUnit::PrecompilationRepository $precomp = self.precomp-repository()
                 --> CompUnit:D
                 )
      {
