@@ -2,10 +2,18 @@
 
 use v6;
 
-{
+sub re-fail {
     my $x = +"a";
-    say $x.^name;
-} # OUTPUT: «Failure␤»
+    unless $x.defined {
+        $x.handled = True;
+        say "Something has failed in \$x ", $x.^name;
+        fail($x);
+        return $x;
+    } 
+}
+
+my $x = re-fail;
+say $x.handled;
 
 try {
     my $x = +"a";
