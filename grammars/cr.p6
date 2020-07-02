@@ -5,7 +5,7 @@ grammar MyGrammar {
     }
 
     token character {
-         \n \n LUKE
+         \n \n <( LUKE
     }
 }
 
