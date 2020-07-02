@@ -1,12 +1,11 @@
 grammar MyGrammar {
 
     token TOP {
-        <character>
+        <.separator><character>
     }
 
-    token character {
-         \n \n <( LUKE
-    }
+    token separator { \n \n }
+    token character { <[A..Z]>+  }
 }
 
-say MyGrammar.subparse("\n\nLUKE");
+say MyGrammar.parse("\n\nLUKE");
