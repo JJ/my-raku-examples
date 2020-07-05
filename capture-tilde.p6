@@ -18,12 +18,14 @@ grammar H {
 	token TOP {
     	      '(' ~ ')' (.+?)
 	}
+
 }
 
 grammar I {
 	token TOP {
     	      '(' ~ ')' <( .+? )>
 	}
+
 }
 
 grammar J {
@@ -38,8 +40,14 @@ grammar K {
 	}
 }
 
+grammar L {
+	token TOP {
+    	      '(' ~ ')' .+? )>
+	}
+}
+
 $str = "(one of us)";
-for G,H,I,J,K -> $grammar {
+for G,H,I,J,K,L -> $grammar {
     say $grammar.parse( $str );
 }
 
