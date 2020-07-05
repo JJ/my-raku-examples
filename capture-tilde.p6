@@ -7,6 +7,7 @@ say $str ~~ /"(" ~ ")" <( \w )> /;
 say $str ~~ /"(" <(~)> ")" \w /;
 say $str ~~ /"(" <(~ ")" \w /;
 
+
 grammar G {
 	token TOP {
     	      '(' ~ ')' $<content> = .+?
@@ -25,8 +26,20 @@ grammar I {
 	}
 }
 
+grammar J {
+	token TOP {
+    	      '(' ~ ')' [(.+?)]
+	}
+}
+
+grammar K {
+	token TOP {
+    	      '(' ~ ')' [<( .+? )>]
+	}
+}
+
 $str = "(one of us)";
-for G,H,I -> $grammar {
+for G,H,I,J,K -> $grammar {
     say $grammar.parse( $str );
 }
 
