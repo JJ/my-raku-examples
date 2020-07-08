@@ -5,7 +5,7 @@ unit grammar Santa-Letter;
 our $pod = $=pod[0];
 
 token TOP { <dear> \v+ <paragraph> [\v+ <paragraph>]* \v+ <signature>\v*}
-token paragraph { <superword>[ \h+ <superword>]+ }
+token paragraph { <superword>[ \h+ <superword>]+ { say $/.raku} }
 token superword { <word> | <enhanced-word> }
 token word { \w+ }
 token enhanced-word { <word> [\,|\.|\:] }
