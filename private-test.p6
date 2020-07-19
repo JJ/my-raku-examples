@@ -6,11 +6,14 @@ role Privateer {
 
 class Privateed does Privateer {
     method !private() { return "⌣"  }
-    method call-private( $method-name )  {
-	self."$method-name".();
+    method public() { return "✓" }
+    method call-method( $method-name )  {
+	self."$method-name"();
     }
 }
 
 my $obj = Privateed.new;
-say $obj.call-private( "!private" );
+say $obj.call-method( "public" );
+say $obj.call-method( "!private" );
+
 
