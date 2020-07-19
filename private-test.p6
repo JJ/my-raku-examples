@@ -1,23 +1,16 @@
 role Privateer {
     method test-method ( $method-name, *@args ) {
-	say self.^methods;
-	my $method = self.^find_method($method-name)[0];
-	say $method;
-	$method( @args );
+	self."!$method-name".(@args);
     }
 }
 
-class Privateed {
+class Privateed does Privateer {
     method !private() { return "⌣"  }
-    method public() { return "✓" };
-    method methods() { return self.^methods };
-    method is-found($method ) { return self.^find_method( $method ); }
+    method call-private( $method-name )  {
+	self."!$method-name".();
+    }
 }
 
 my $obj = Privateed.new;
-say $obj.methods;
-say $obj.is-found( "private" );
-say $obj.is-found( "public" );
-say $obj.^methods.raku;
+say $obj.call-private( "private" );
 
-say $obj.test-method( "private" );
