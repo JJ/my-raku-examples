@@ -14,8 +14,14 @@ class Random {
 my $obj = Privateed.new;
 say $obj.test-private-method( "private" );
 
+$obj = Random.new;
+$obj does Privateer;
+say $obj.test-private-method( "private" );
+
 $obj = Random.new but Privateer;
 say $obj.test-private-method( "private" );
+
+
 
 
 
