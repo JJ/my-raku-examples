@@ -8,7 +8,15 @@ class Privateed does Privateer {
     method !private() { return "⌣"  }
 }
 
+class Random {
+    method !private() { return "⛔" }
+}
 my $obj = Privateed.new;
 say $obj.test-private-method( "private" );
+
+$obj = Random.new but Privateer;
+say $obj.test-private-method( "private" );
+
+
 
 
