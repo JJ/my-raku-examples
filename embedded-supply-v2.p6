@@ -10,7 +10,7 @@ my $parsed = supply {
         emit( { Seen => $_.event }  );
         CATCH {
             default {
-                $*ERR.say: .message;
+                $*ERR.say: "Error" ~ .message;
             }
         }
     }
