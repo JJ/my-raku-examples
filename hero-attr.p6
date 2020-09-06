@@ -5,10 +5,7 @@ use v6;
 class Hero { 
     has @!inventory;
     has Str $.name;
-    submethod BUILD( :$name, :@inventory ) {
-        $!name = $name;
-        @!inventory = @inventory
-    }
+    submethod BUILD( :$!name, :@!inventory ) {}
 }
 
 say Hero.^attributes(:local)[0];
