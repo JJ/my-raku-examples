@@ -3,7 +3,7 @@
 use v6;
 
 class Hero { 
-    has @!inventory;
+    has @.inventory;
     has Str $.name;
     submethod BUILD( :$!name, :@!inventory ) {
         @!inventory = self.clean-inventory( @!inventory );
@@ -11,10 +11,9 @@ class Hero {
     submethod clean-inventory( @inventory ) {
         @!inventory.unique.sort
     }
-    method attributes { @!inventory };
 }
 
 my Hero $þor .= new( name => "Þor",
                      inventory => ( "Mjollnir", "Megingjörð", "Mjollnir" ) );
-say $þor.attributes;
+say $þor.inventory;
 
