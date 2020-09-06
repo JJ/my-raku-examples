@@ -8,7 +8,9 @@ class Hero {
     submethod BUILD( :$!name, :@!inventory ) {
         @!inventory = self.clean-inventory( @!inventory );
     }
-    submethod clean-inventory( @inventory ) { @!inventory.unique.sort }
+    submethod clean-inventory( @inventory ) {
+        @!inventory.unique.sort
+    }
     method attributes { @!inventory };
 }
 
