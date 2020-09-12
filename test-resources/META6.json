@@ -1,0 +1,16 @@
+{
+  "provides": {
+    "Resourceable.pm6": "lib/Resourceable.pm6"
+  },
+  "license": "Write me!",
+  "description": "Write me!",
+  "perl": "6.*",
+  "auth": "Write me!",
+  "version": "0.0.1",
+    "resources": [
+	"lib/libwhatever.so",
+	"data/swim.csv"
+    ],
+  "meta-version": "0",
+  "name": "Test resources"
+}
