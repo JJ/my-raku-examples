@@ -2,8 +2,8 @@
   "provides": {
     "Resourceable": "lib/Resourceable.pm6"
   },
-  "license": "Write me!",
-  "description": "Write me!",
+  "license": "github:JJ",
+  "description": "Testing how Distribution::Resource(s) work",
   "perl": "6.*",
   "auth": "Write me!",
   "version": "0.0.1",
