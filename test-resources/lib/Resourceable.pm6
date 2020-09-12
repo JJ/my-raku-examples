@@ -1,5 +1,5 @@
 unit class Resourceable;
 
-method gimme {
+method gimme(::?CLASS:D: ) {
     %?RESOURCES;
 }

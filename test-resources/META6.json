@@ -8,7 +8,7 @@
   "auth": "Write me!",
   "version": "0.0.1",
     "resources": [
-	"lib/libwhatever.so",
+	"libraries/whatever",
 	"data/swim.csv"
     ],
   "meta-version": "0",
