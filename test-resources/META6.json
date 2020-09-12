@@ -1,6 +1,6 @@
 {
   "provides": {
-    "Resourceable.pm6": "lib/Resourceable.pm6"
+    "Resourceable": "lib/Resourceable.pm6"
   },
   "license": "Write me!",
   "description": "Write me!",
@@ -12,5 +12,5 @@
 	"data/swim.csv"
     ],
   "meta-version": "0",
-  "name": "Test resources"
+  "name": "Resourceable"
 }
