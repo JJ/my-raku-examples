@@ -12,7 +12,7 @@
 	"data/swim.csv"
     ],
     "depends": {
-	 "build": {
+	 "test": {
             "requires": [
                 "Zef::Distribution"
             ]
