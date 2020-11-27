@@ -2,11 +2,15 @@
 
 use v6;
 
-role Zipi[ \t ] {
-    method zape { "Uses " ~ t };
-}
+subset Two-Tops of UInt where * <=2;
+subset Three-Tops of UInt where * <=3;
 
-for Zipi[1|2], Zipi[3], Zipi[[3,4]] -> $role {
-    say $role.HOW;
-    say $role.new().zape;
+role Zipi[ ::Capper ] {
+    has Capper $.floor;
 }
+    
+class Capped-at-three does Zipi[Three-Tops] {}
+
+
+my $capped = Capped-at-three.new( floor => 2 );
+say $capped.raku;
