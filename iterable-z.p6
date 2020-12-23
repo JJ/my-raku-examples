@@ -7,6 +7,12 @@ class DNA does Iterable {
     }
 
     method iterator(DNA:D:) {
+        say "Iterator called";
+        $!chain.comb.rotor(3).iterator;
+    }
+
+    method item() {
+        say "item called";
         $!chain.comb.rotor(3).iterator;
     }
 }
