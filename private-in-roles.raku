@@ -1,8 +1,11 @@
+class A {…}
+
 role R {
-  has $!private;
+  has A $!private;
 
   method !s {
-      $!private if $!private;
+      say $!private!s;
+      say $.b;
   }
 
   method !private-method {
@@ -13,10 +16,14 @@ role R {
       self!private-method;
   }
 
-  method set_private($a) {
+  method set_private(A $a) {
       $!private = $a;
   }
 }
+
+class A does R {
+  has Str $.b = 'secret';
+};
 
 class B does R {
   method b { self!s }
@@ -24,5 +31,5 @@ class B does R {
 
 my $b = B.new();
 $b.public-method();
-$b.set_private("foo");
+$b.set_private(A.new);
 say $b.b;
