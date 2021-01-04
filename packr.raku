@@ -2,6 +2,6 @@
 
 use Packr;
 
-for (Packr::Pack'd Packr::B::Pack'd Packr::U::Pack'd ) -> \P {
+for (Packr::Packd Packr::B::Packd ) -> \P {
     say P.new().raku;
 }

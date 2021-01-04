@@ -1,7 +1,7 @@
 unit package Packr;
 
-our class Pack'd is export {}
+our class Packd is export {}
 
-our class B::Pack'd is export {}
-
-our class U::Pack'd is export {}
+our package B {
+    our class Packd is export {}
+}
