@@ -4,7 +4,7 @@ use v6;
 
 =begin pod
 
-I would like to talk about C<-->>, C<<< >>> and C«<--»
+I would like to talk about C<-->>, C<<< >>>,  C< << >> >, C<< >> and C«<--»
 
 =end pod
 
