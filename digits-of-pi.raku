@@ -29,5 +29,4 @@ my $p = start {
     }
 }
 
-
 await $p, $one, $two;
