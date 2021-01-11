@@ -10,7 +10,7 @@ for @foo <-> $value {
 	when $value %% 2 { $value = $value but "Even" }
 	default { $value = $value but "Odd" }
     }
-	@bar.push: $value;
+    @bar.push: $value;
 }
 
 say @bar;
