@@ -5,22 +5,20 @@ use v6;
 class DNA {
     has $.chain is rw;
 
-    method STORE ($chain where {
-                         $chain ~~ /^^ <[ACGT]>+ $$ / and
-                         $chain.chars %% 3
-                     }, :$initialize --> DNA) {
-        if $initialize {
-            self= DNA.new( chain => $chain )
-        } else {
-            self.chain = $chain;
-            self
-        }
+    method STORE (Str $chain where {
+			 /^^ <[ACGT]>+ $$ / and
+			 .chars %% 3
+		     } ,
+		  :$INITIALIZE --> DNA) {
+            self.chain  = $chain;
+	    self
     }
 
-    method Str(::?CLASS:D:) { return $.chain.comb.rotor(3) }
+    method Str(::?CLASS:D:) { return $!chain.comb.rotor(3).map( *.join("")).join("|") }
 };
 
 my @string is DNA = 'GAATCC';
+say  @string.raku;
 say @string.Str;
 @string = 'ACGTCG';
 say @string.Str;
