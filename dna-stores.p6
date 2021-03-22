@@ -7,7 +7,7 @@ role Logger { method log( Str $msg) {…}}
 class ConsoLogger does Logger { method log ( Str $msg ) { "❢ $msg".say }}
 
 class DNA {
-    has $.chain is rw;
+    has $.chain;
     has Logger $!logger;
 
     submethod BUILD( :$chain, :$logger = ConsoLogger.new() ) {}
@@ -22,8 +22,8 @@ class DNA {
 	    $!logger.log( "Initialized" );
 	}
 
-        self.chain  = $chain;
-	$!logger.log("Change value to $chain" ); 
+        $!chain := $chain;
+	$!logger.log("Change value to $chain" );
 	self
     }
 
