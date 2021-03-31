@@ -1,12 +1,13 @@
 #!/usr/bin/env raku
 
+constant ITEMS = 100;
 for 1..15 -> $iter {
     my $lock = Lock.new;
     my $cond = $lock.condition;
     my $todo = 0;
     my $done = 0;
-    my @in = 1..100;
-    my @out = 0 xx 100;
+    my @in = 1..ITEMS;
+    my @out = 0 xx ITEMS;
 
     loop ( my $i = 0; $i < @in; $i++ ) {
         my $in := @in[$i];
