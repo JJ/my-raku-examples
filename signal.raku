@@ -9,8 +9,8 @@ for 1..15 -> $iter {
     my @in = 1..ITEMS;
     my @out = 0 xx ITEMS;
 
-    loop ( my $i = 0; $i < @in; $i++ ) {
-        my $in := @in[$i];
+    for 1..ITEMS -> $i {
+        my $in = $i;
         my $out := @out[$i];
         Thread.start( {
                     $out = $in * 10;
