@@ -37,6 +37,5 @@ inc/
 /*.zip
 
 *~
-lib/
 .precomp
 .idea
