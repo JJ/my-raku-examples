@@ -1,12 +1,13 @@
 #!/usr/bin/env raku
 
 class Foo {
-    method ^bar( Mu \foo) {
-	foo.^set_name( foo.^name ~ "[þ]" );
+    method ^bar( Mu \foo, Str $addenda) {
+	foo.^set_name( foo.^name ~ $addenda );
     }
 }
 
 my $foo = Foo.new();
 say $foo.^name;
-Foo.^bar( );
+Foo.new().^bar(  "[baz]" );
 say $foo.^name;
+say Foo.^name;
