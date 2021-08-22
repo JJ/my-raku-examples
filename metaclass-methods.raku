@@ -8,6 +8,6 @@ class Foo {
 
 my $foo = Foo.new();
 say $foo.^name;
-Foo.new().^bar(  "[baz]" );
+Foo.new.^bar(  "[baz]" );
 say $foo.^name;
 say Foo.^name;
