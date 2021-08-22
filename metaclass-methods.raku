@@ -3,7 +3,6 @@
 class Foo {
     method ^bar( Mu \foo) {
 	foo.^set_name( foo.^name ~ "[þ]" );
-	return foo;
     }
 }
 
