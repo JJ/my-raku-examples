@@ -16,3 +16,25 @@
     $_ = 1;
     when $a { say "We have a 2" }
 }
+
+{
+    my $a = 1;
+    $_ = False;
+    when so $a { say "We have a 3" }
+}
+
+{
+    my $a = 0;
+    $_ = False;
+    when so $a { say "We have a 4" }
+}
+
+{
+    $_ = 33;
+    when 30 + 3 { say "We have a 5" }
+}
+
+{
+    $_ = 32;
+    when 30 + 3 { say "We have a 6" }
+}
