@@ -1,0 +1,25 @@
+{
+  "name": "GitHub::Actions",
+  "description": "Raku distribution template",
+  "version": "0.0.1",
+  "perl": "6.d",
+  "meta-version": 1,
+  "authors": [],
+  "auth": "",
+  "depends": [],
+  "test-depends": [
+    "Test",
+    "Test::META"
+  ],
+  "provides": { },
+  "resources": [
+    ".resources_files_go_here"
+  ],
+  "license": "Artistic-2.0",
+  "tags": [
+    "modules",
+    "template",
+    "test"
+  ],
+  "source-url": ""
+}
