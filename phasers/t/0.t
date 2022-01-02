@@ -1,13 +1,13 @@
 use Test;
+use Var;
 
 BEGIN {
   %*ENV{'FOO'} = 'foo';
-  %*ENV{'BAR'} = 'bar';
+  %*ENV{'var'} = 'quux';
   say "Setting ENV";
 }
 
-for <foo bar>  -> $k {
-  is( %*ENV{uc($k)}, $k, "Key «$k» set" );
-}
+is( %*ENV<FOO>, 'foo', "Key «FOO» set" );
+is( $var, 'quux', "Var in module set");
 
 done-testing;

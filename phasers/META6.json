@@ -11,7 +11,7 @@
     "Test",
     "Test::META"
   ],
-  "provides": { },
+    "provides": { "Var": "lib/Var.rakumod"},
   "resources": [
     ".resources_files_go_here"
   ],
