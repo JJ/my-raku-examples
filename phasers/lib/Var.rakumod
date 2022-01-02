@@ -1,7 +1,7 @@
 unit module Var;
 
 our $var  is export;
-BEGIN {
+INIT {
     $var = %*ENV<var>;
     say "Setting var $var";
 }
