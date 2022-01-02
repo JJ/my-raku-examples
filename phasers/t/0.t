@@ -2,13 +2,13 @@ use Test;
 
 BEGIN {
   %*ENV{'FOO'} = 'foo';
-  %*ENV{'var'} = 'quux';
+  %*ENV{'var'} = 'bar';
   say "Setting ENV";
 }
 
 use Var;
 
 is( %*ENV<FOO>, 'foo', "Key «FOO» set" );
-is( $var, 'quux', "Var in module set");
+is( $var, 'bar', "Var in module set");
 
 done-testing;
