@@ -6,6 +6,10 @@ use Singleton;
 
 singleton Foo {
     has $.bar;
+
+    method gist() {
+        return "→ $!bar";
+    }
 }
 
 my $foo = Foo.new(:3bar);
