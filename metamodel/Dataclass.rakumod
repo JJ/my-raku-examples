@@ -1,20 +1,14 @@
-my class MetamodelX::Singleton is Metamodel::ClassHOW {
-    has $!instance;
+my class MetamodelX::Dataclass is Metamodel::ClassHOW {
 
-    method compose(Mu \type) {
-        say type.^name;
-        self.add_method(type, 'bless', -> \SELF, |c {
-            without $!instance {
-                $!instance := SELF.Mu::bless(|c);
-            }
-            $!instance
-        });
+    method add_method($obj, $name, $code_obj) {
+        self.add_method( $obj, $name,
+                -> { die "Data classes have no methods"} );
         callsame();
     }
 }
 
 my package EXPORTHOW {
     package DECLARE {
-        constant singleton = MetamodelX::Singleton;
+        constant dataclass = MetamodelX::Dataclass;
     }
 }
