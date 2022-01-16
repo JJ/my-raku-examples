@@ -19,5 +19,5 @@ my $foo = Foo.new(:3bar);
 
 say $foo.bar;
 
-$foo.set_bar(33);
+$foo.bar = 33 ;
 say $foo.bar;
