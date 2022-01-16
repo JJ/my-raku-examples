@@ -10,7 +10,7 @@ my &Logger = -> $event, $key = Nil  {
         if $key ne "" {
             %store{ %store.keys.grep( /$key/ ) }
         } else {
-            %store;
+            %store<>;
         }
     }
 }
@@ -25,9 +25,9 @@ my &Logger::logs = &Logger.assuming( *, Nil );
 my &Logger::get = &Logger.assuming( Nil, * );
 
 Logger::logs( <an array> );
-&Logger::logs( %(key => 42 ) );
+Logger::logs( %(key => 42 ) );
 
-say &Logger::get( "2022-01-16");
+say Logger::get( "2022-01-16");
 
 my $typer = -> $thing { $thing.^name ~ ' → ' ~ $thing };
 
@@ -40,4 +40,4 @@ Logger::logs( "New one");
 
 &Logger does Forable;
 
-.say for &Logger;
+.say for &Logger.iterator;
