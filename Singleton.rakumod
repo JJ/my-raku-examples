@@ -1,13 +1,15 @@
 my class MetamodelX::Singleton is Metamodel::ClassHOW {
-
-    my \instance = Mu;
+    has $!instance;
 
     method compose(Mu \type) {
-        my &callsame := CORE::<&callsame>; # Workaround for RT #127858
-        self.method_table(type)<new>.wrap: -> \SELF, | {
-            unless instance.defined { instance = SELF };
-            callsame();
-        };
+        say type.^name;
+        self.add_method(type, 'bless', -> \SELF, |c {
+            without $!instance {
+                $!instance := SELF.Mu::bless(|c);
+            }
+            $!instance
+        });
+        callsame();
     }
 }
 
