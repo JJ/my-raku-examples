@@ -1,7 +1,5 @@
 #!/usr/bin/env perl6
 
-use v6;
-
 use experimental :macros;
 
 macro modulo( $c ) {
