@@ -26,8 +26,10 @@ class Zape does Zipi {
 
 say Zape.new( :42zipi ).visit;
 
-my regex future {...};
+grammar Quux {
+    my regex future {...};
 
-say "foobarbaz" ~~ /<future>/;
+    say "foobarbaz" ~~ /<future>/;
 
-regex future { f \w** 2 b \w ** 2 }
+    regex future { f \w** 2 b \w ** 2 }
+}
