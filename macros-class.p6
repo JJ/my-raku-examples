@@ -4,7 +4,8 @@ use experimental :macros;
 class Mass-lb { }
 
 macro mass-lb-alias( $c ) {
-    quasi " class Mass-{{{$c}}} is Mass-lb "
+    my $mass-lb = "Mass-$c";
+    quasi { class  {{{$mass-lb}}} is Mass-lb }
 };
 
 for <lbs pounds pound pnds> {
