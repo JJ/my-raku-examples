@@ -6,4 +6,4 @@ grammar TestGrammar {
 my $test-grammar = TestGrammar.new();
 my $token = $test-grammar.^lookup('num');
 
-say "3" ~~ $token(TestGrammar);
+say "3" ~~ TestGrammar.$token;
