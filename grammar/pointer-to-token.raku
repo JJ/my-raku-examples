@@ -4,6 +4,6 @@ grammar TestGrammar {
 
 
 my $test-grammar = TestGrammar.new();
-my $token = $test-grammar.^lookup('num');
+my $token = $test-grammar.^find_method('num');
 
 say "3" ~~ TestGrammar.$token;
