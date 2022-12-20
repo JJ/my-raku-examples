@@ -2,8 +2,7 @@ grammar TestGrammar {
     token num { \d+ }
 }
 
-
 my $test-grammar = TestGrammar.new();
-my $token = $test-grammar.^find_method('num');
+my $token = $test-grammar.^lookup('num').assuming($test-grammar);
 
-say "3" ~~ TestGrammar.$token;
+say "33" ~~ $token;
