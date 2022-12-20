@@ -3,6 +3,6 @@ grammar TestGrammar {
 }
 
 my $test-grammar = TestGrammar.new();
-my $token = $test-grammar.^lookup('num').assuming($test-grammar);
+my $a-token = $test-grammar.^lookup('num').assuming($test-grammar);
 
-say "33" ~~ $token;
+say "33" ~~ $a-token;
